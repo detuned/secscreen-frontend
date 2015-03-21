@@ -1,0 +1,17 @@
+<div data-ng-controller="WidgetAnswerCtrlEdit">
+	<div class="widget_area">
+		<widget-fieldset>
+			<input type="text" class="wfield wfield__text widget_title" data-ng-model="edit.widget.fields.title" data-ng-change="edit.autoSave()" data-widget-field-autofocus data-field-autocomplete />
+		</widget-fieldset>
+		<widget-fieldset>
+			<widget-img-field data-img="edit.widget.fields.img"  data-change="edit.autoSave"  data-sources="[CONST.IMG_EXPORT_TYPE_VR, CONST.IMG_EXPORT_TYPE_BLITZ, CONST.IMG_EXPORT_TYPE_INTERNAL]" data-default-source="CONST.IMG_EXPORT_TYPE_BLITZ" data-size="{{CONST.IMG_SIZE_FULL}}" data-default-base-tags="edit.widget.tags" data-croppable data-drop-id="{{widget.id + '_img'}}" data-is-visible="{{edit.isVisible()}}"></widget-img-field>
+		</widget-fieldset>
+		<widget-fieldset>
+			<textarea class="wfield wfield__textarea" data-ng-model="edit.widget.fields.text" data-ng-change="edit.autoSave()" placeholder="Intro" data-field-autocomplete></textarea>
+		</widget-fieldset>
+		<widget-fieldset class="facts" data-ng-repeat="i in [0,1,2,3,4]">
+			<input type="text" class="wfield wfield__text" data-ng-model="edit.widget.fields.table[i].column1_text" data-ng-change="edit.autoSave()" placeholder="Question" data-field-autocomplete />
+			<textarea class="wfield wfield__textarea" data-ng-model="edit.widget.fields.table[i].column2_text" data-ng-change="edit.autoSave()" placeholder="Answer" data-field-autocomplete></textarea>
+		</widget-fieldset>
+	</div>
+</div>

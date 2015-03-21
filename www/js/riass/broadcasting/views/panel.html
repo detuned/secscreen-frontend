@@ -1,0 +1,11 @@
+<section class="panel"
+		 data-ng-class="getPanelClass()">
+	<header class="panel_header">
+		<panel-buttons data-family="layout">
+			<panel-button data-ng-repeat="button in buttons" data-type="{{button.type}}" data-family="layout"
+						  data-is-active="+ panel.state == + button.state" data-title="{{button.title}}"
+						  data-ng-click="setPanelState(button.state)"></panel-button>
+		</panel-buttons>
+	</header>
+	<article class="panel_body" data-ng-transclude></article>
+</section>

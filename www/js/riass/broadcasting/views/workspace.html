@@ -1,0 +1,14 @@
+<div data-ng-controller="WorkspaceCtrl" class="workspace" data-widget-droppable-zone="{ 'name' : 'workspace' }"  data-image-droppable-zone="{ 'name' : 'workspace' }" data-workspace-container>
+	<panel-ext-header>
+		<panel-buttons data-family="workspace">
+			<panel-button data-ng-repeat="button in controlButtons" data-type="{{button.type}}" data-view="text" data-family="workspace" data-text="{{button.text}}" data-is-accent="button.accent" data-ng-click="controlButtonAction(button)" data-opaque></panel-button>
+		</panel-buttons>
+	</panel-ext-header>
+	<div class="workspace_core" data-reposition-trigger="scroll">
+		<div class="workspace_desk">
+			<div data-ng-repeat="wsWidgetData in wsWidgets" class="workspace_widget-wrap">
+				<ws-widget data-ws-widget="wsWidgetData"></ws-widget>
+			</div>
+		</div>
+	</div>
+</div>

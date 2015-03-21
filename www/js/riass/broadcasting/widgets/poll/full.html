@@ -1,0 +1,21 @@
+<div class="widget-full" data-ng-controller="WidgetPollCtrl">
+	<div class="widget_area">
+		<div class="widget_title" data-ng-bind-html-unsafe="widget.fields.title|parseTextField:widget.attach"></div>
+	</div>
+	<div class="widget_area">
+		<div class="widget_text" data-ng-bind-html-unsafe="widget.fields.text|parseTextField:widget.attach"></div>
+	</div>
+	<div class="widget_area" class="questions" data-ng-show="showQuestions()">
+		<div data-ng-repeat="i in [0,1,2,3,4]" class="fact_text" data-ng-show="widget.fields.table[i].column1_text || widget.fields.table[i].column2_text">
+			<div class="fake_radio"><div data-ng-show="$first"></div><span data-ng-hide="$first">&nbsp;</span></div>
+			<div class="widget_text column1" data-ng-bind-html-unsafe="widget.fields.table[i].column1_text|parseTextField:widget.attach"></div>
+		</div>
+	</div>
+	<div class="widget_area chart_area" class="results" data-ng-show="!showQuestions()">
+		<div data-ng-repeat="i in [0,1,2,3,4]" class="fact_text" data-ng-show="widget.fields.table[i].column1_text || widget.fields.table[i].column2_text">
+			<div class="votes">{{ widget.fields.table[i].column2_text }}</div>
+			<div class="chart" data-ng-style="{ width : getChartWidth( widget.fields.table[i].column2_text ) }"></div>
+			<div class="widget_text column1" data-ng-bind-html-unsafe="widget.fields.table[i].column1_text|parseTextField:widget.attach"></div>
+		</div>	
+	</div>
+</div>

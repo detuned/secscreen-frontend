@@ -1,0 +1,14 @@
+<div data-ng-controller="WidgetPollCtrlEdit">
+	<div class="widget_area">
+		<widget-fieldset>
+			<input type="text" class="wfield wfield__text widget_title" data-ng-model="edit.widget.fields.title" data-ng-change="edit.autoSave()" placeholder="Title" data-widget-field-autofocus data-field-autocomplete />
+		</widget-fieldset>
+		<widget-fieldset>
+			<textarea class="wfield wfield__textarea" data-ng-model="edit.widget.fields.text" data-ng-change="edit.autoSave()" placeholder="Intro" data-field-autocomplete></textarea>
+		</widget-fieldset>
+		<widget-fieldset class="facts" data-ng-repeat="i in [0,1,2,3,4]">
+			<input type="text" class="wfield wfield__text" data-ng-model="edit.widget.fields.table[i].column1_text" data-ng-change="edit.autoSave()" placeholder="Question" data-field-autocomplete />
+			<textarea class="wfield wfield__textarea" data-ng-model="edit.widget.fields.table[i].column2_text" data-ng-change="edit.autoSave()" placeholder="Answer" data-field-autocomplete></textarea>
+		</widget-fieldset>
+	</div>
+</div>

@@ -1,0 +1,17 @@
+<div class="widget-full" data-ng-controller="WidgetGameMomentCtrl">
+	<div class="widget_area">
+		<div class="widget_title" data-ng-bind-html-unsafe="widget.fields.title|parseTextField:widget.attach"></div>
+	</div>	
+	<widget-img img="widget.fields.img" data-size="{{CONST.IMG_SIZE_FULL}}"></widget-img>
+	<div class="widget_area">
+		<div class="widget_person">
+			<div class="widget_person widget_person__pictured" data-ng-show="widget.fields.person.text">
+				<div class="widget_person_picture"><widget-img img="widget.fields.person.img" data-size="{{CONST.IMG_SIZE_SMALL}}"></widget-img></div>
+				<div class="widget_person_text" data-ng-bind-html-unsafe="widget.fields.person.text|parseTextField:widget.attach"></div>
+			</div>
+	</div>
+	</div>
+	<div class="widget_area">
+		<div class="widget_text" data-ng-bind-html-unsafe="widget.fields.text|parseTextField:widget.attach"></div>
+	</div>
+</div>

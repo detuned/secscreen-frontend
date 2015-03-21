@@ -1,0 +1,132 @@
+<div class="ws-widget" data-ng-controller="WorkspaceWidgetCtrl" data-ng-class="[
+	'ws-widget__id-' + wsWidget.id,
+	'ws-widget__state-' + wsWidget.state,
+	! widget.id && ! wsWidget.isLoading ? 'ws-widget__create' : '',
+	widget.isPublished ? 'ws-widget__published' : '',
+	widget.isPreloaded ? 'ws-widget__preloaded' : '',
+	widget.isBusy ? 'ws-widget__busy' : '',
+	wsWidget.isLoading ? 'ws-widget__loading' : '',
+	wsWidget.isRemoving ? 'ws-widget__removing' : '',
+	wsWidget.isHighlighted ? 'ws-widget__highlighted' : '',
+	wsWidget.isAboutRemove ? 'ws-widget__about-remove' : '',
+	wsWidget.isReadyToChangeState ? 'ws-widget__flippable' : '',
+	wsWidget.isChangingState ? 'ws-widget__flipping' : '',
+	'widget-type__' + widget.type
+	]" data-change-state-trigger="wsWidget.state">
+	<div class="ws-widget_core">
+		<div class="ws-widget_state ws-widget_state__create" data-ng-controller="WorkspaceCreateWidgetCtrl">
+			<div class="ws-widget_header">
+				<span class="ws-widget_status" data-ng-bind="wsWidget.status"></span>
+				<span class="ws-widget_close-button" data-ng-click="removeFromWorkspace()" title="Remove from workspace"><span class="icon icon__close"></span></span>
+			</div>
+			<div class="ws-widget_body">
+				<div class="ws-widget_create">
+					<div class="widget_area ws-widget_create_header">
+						<h3 class="ws-widget_create_title">Choose a template</h3>
+						<div class="widget_create_filter_wrap" data-ng-show="types.length > 5">
+							<input class="ws-widget_create_filter" type="text" name="search" data-ng-model="search" autocomplete="off" placeholder="Filter" data-ws-widget-filter-field />
+						</div>
+					</div>
+					<div class="widget_area">
+						<div class="ws-widget_create_pane">
+							<ul class="ws-widget_create_list">
+								<li class="ws-widget_create_item" data-ng-repeat="type in filteredTypes" data-ng-class="[
+								'ws-widget_create_item__' + type.name,
+								type.typeId == selectedTypeId
+									? 'ws-widget_create_item__active'
+									: '',
+								! type.fields
+									? 'ws-widget_create_item__base'
+									: ''
+								]" data-ng-click="selectType( type.typeId )" data-ng-dblclick="selectType( type.typeId ); createWidget()">
+									<span class="ws-widget_create_icon"></span>
+									<span class="ws-widget_create_item_title" data-ng-bind="type.title"></span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ws-widget_footer">
+				<span class="button button__gray button__compact" data-ng-click="createWidget()">Create</span>
+				<span class="button button__gray button__compact button__text" data-ng-click="removeFromWorkspace()">Don't create</span>
+			</div>
+			<span class="ws-widget_spinner"></span>
+		</div>
+		<div class="ws-widget_state ws-widget_state__view">
+			<span class="ws-widget_dragger"></span>
+			<div class="ws-widget_header">
+				<span class="ws-widget_options" data-ng-show="widget.isStarred">
+					<span class="ws-widget_option ws-widget_option__readonly ws-widget_option__star"><span class="ws-widget_option_icon-wrap"><span class="icon icon__widget_star"></span></span></span>
+				</span>
+				<span class="ws-widget_status" data-ng-bind="wsWidget.status"></span>
+				<span class="ws-widget_busy"><span class="icon icon__busy-small"></span><span class="ws-widget_editors"><span class="ws-widget_editor" data-ng-repeat="editor in widget.editors" data-ng-bind="editor.user.name"></span></span></span>
+				<span class="ws-widget_id" data-ng-bind="widget.id"></span>
+				<span class="ws-widget_close-button" data-ng-click="removeFromWorkspace()" title="Remove from workspace"><span class="icon icon__close"></span></span>
+			</div>
+			<div class="ws-widget_body">
+				<div class="ws-widget_display widget_display__view"><!-- Placeholder for widgetTypeDisplay --></div>
+			</div>
+			<div class="ws-widget_footer">
+				<span class="button button__gray button__compact" data-ng-click="changeState( STATES.EDIT )">Change</span>
+				<span class="button button__red button__disabled button__compact ws-widget_public-button" data-ng-show="widget.isPublished" title="All changes will be published immediately after you save the widget">Widget is published</span>
+				<span class="button button__red button__compact ws-widget_public-button" data-ng-click="publish()" data-ng-show="( broadcasting.status == CONST.BROADCASTING_STATUS_ON ) && ! widget.isPublished">Publish</span>
+			</div>
+			<span class="ws-widget_spinner"></span>
+		</div>
+		<form class="ws-widget_state ws-widget_state__edit" data-ng-submit="onSubmit()" method="post" data-widget-droppable-zone="{ 'name' : 'widgetAttach' }" data-widget-droppable-zone-data="{ 'id' : {{widget.id}} }">
+			<div class="ws-widget_header">
+				<div class="ws-widget_options">
+					<label class="ws-widget_option ws-widget_option__star"><span class="ws-widget_option_icon-wrap"><span class="icon icon__widget_star"></span></span><input type="checkbox" class="ws-widget_option_field" data-ng-model="edit.widget.isStarred" data-ng-change="edit.autoSave()" autocomplete="off"/></label><!--label class="ws-widget_option ws-widget_option__info"><span class="ws-widget_option_icon-wrap"><span class="icon icon__widget_info"></span></span><input type="checkbox" class="ws-widget_option_field" data-ng-model="edit.widget.isInfo"  data-ng-change="edit.autoSave()" autocomplete="off"/></label-->
+				</div>
+				<span class="ws-widget_status" data-ng-bind="wsWidget.status"></span>
+				<span class="ws-widget_id" data-ng-bind="widget.id"></span>
+				<span class="ws-widget_close-button" data-ng-click="removeFromWorkspaceWhenEdit()" title="Remove from workspace"><span class="icon icon__close"></span></span>
+			</div>
+			<fieldset class="ws-widget_body">
+				<div class="ws-widget_display widget_display__edit"><!-- Placeholder for widgettypeDisplay --></div>
+				<div class="widget_area">
+					<div class="ws-widget_attach" data-ng-show="edit.widget.attach.length > 0">
+						<span class="ws-widget_attach_icon icon icon__attach"></span>
+						<div class="ws-widget_attach_list">
+							<div data-ng-repeat="attachId in edit.widget.attach" class="ws-widget_attach_item">
+								<widget-text data-id="attachId" data-ng-click="attachClick( attachId )"></widget-text>
+								<span class="ws-widget_attach_item_close" data-ng-click="removeAttach($index)">
+									<span class="icon icon__close-small ws-widget_attach_item_close-icon"></span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+			<fieldset class="ws-widget_footer">
+				<div class="ws-widget_tags">
+					<tags-input data-tags="edit.widget.tags" data-allow-add-tags></tags-input>
+				</div>
+
+				<div class="ws-widget_error-msg" data-ng-show="wsWidget.isError" data-ng-bind="wsWidget.errorMsg"></div>
+
+				<div class="ws-widget_note ws-widget_note__warn" data-ng-show="widget.isPublished">Warning! This widget is already published so if you save it, all the changes will be published immediately.</div>
+
+				<div class="ws-widget_note ws-widget_note__warn" data-ng-show="widget.pubCount > 0">
+					Copies of this widget in its current state were published or preloaded. After you save it now, publications counter will be reset.</div>
+				<div class="ws-widget_submit-buttons">
+					<button type="submit" class="button button__compact" data-ng-bind="widget.isPublished ? 'Save And Publish' : 'Save' " data-ng-class="widget.isPublished ? 'button__red' : 'button__gray'"></button>
+					<span class="button button__text button__compact" data-ng-click="onCancel()">Don't save</span>
+					<span class="button button__red button__compact ws-widget_remove-button" data-ng-click="prepareRemove()" data-ng-show=" ! widget.isPublished "><span class="icon icon__trash-mini"></span>Remove</span>
+				</div>
+			</fieldset>
+			<div class="ws-widget_about-remove">
+				<h2 class="ws-widget_about-remove_title">Do you really want to delete this widget?</h2>
+				<div class="ws-widget_about-remove_text">
+					It will disappear from all folders and workspace. You won't be able to get it back.
+				</div>
+				<div class="ws-widget_about-remove_buttons">
+					<span class="button button__red button__compact ws-widget_about-remove_button" data-ng-click="remove()" data-ng-show=" ! widget.isPublished "><span class="icon icon__trash-mini"></span>Delete forever</span>
+					<span class="button button__text button__text__bright button__compact" data-ng-click="cancelPrepareRemove()">Don't delete</span>
+				</div>
+			</div>
+			<span class="ws-widget_spinner"></span>
+		</form>
+	</div>
+</div>

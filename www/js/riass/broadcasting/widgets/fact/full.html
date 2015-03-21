@@ -1,0 +1,14 @@
+<div class="widget-full" data-ng-controller="WidgetFactCtrl">
+	<div class="widget_area">
+		<div class="widget_title" data-ng-bind-html-unsafe="widget.fields.title|parseTextField:widget.attach"></div>
+	</div>
+	<widget-img img="widget.fields.icon" data-size="{{CONST.IMG_SIZE_FULL}}" class="icon_image"></widget-img>
+	<widget-img img="widget.fields.img" data-size="{{CONST.IMG_SIZE_FULL}}"></widget-img>
+	<div class="widget_area">
+		<div class="widget_text" data-ng-bind-html-unsafe="widget.fields.text|parseTextField:widget.attach"></div>
+	</div>
+	<div data-ng-repeat="i in [0,1,2,3,4]" class="fact_text" data-ng-show="widget.fields.table[i].column1_text || widget.fields.table[i].column2_text">
+		<div class="widget_text column1" data-ng-bind-html-unsafe="widget.fields.table[i].column1_text|parseTextField:widget.attach"></div>
+		<div class="widget_text column2" data-ng-bind-html-unsafe="widget.fields.table[i].column2_text|parseTextField:widget.attach"></div>
+	</div>
+</div>

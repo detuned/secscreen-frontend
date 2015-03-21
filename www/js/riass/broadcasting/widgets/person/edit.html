@@ -1,0 +1,13 @@
+<div data-ng-controller="WidgetPersonCtrlEdit">
+	<widget-fieldset>
+		<widget-img-field data-img="edit.widget.fields.img"  data-change="edit.autoSave"  data-sources="[CONST.IMG_EXPORT_TYPE_VR, CONST.IMG_EXPORT_TYPE_BLITZ, CONST.IMG_EXPORT_TYPE_INTERNAL]" data-default-source="CONST.IMG_EXPORT_TYPE_BLITZ" data-size="{{CONST.IMG_SIZE_FULL}}" data-default-base-tags="edit.widget.tags" data-croppable data-drop-id="{{widget.id + '_img'}}" data-is-visible="{{edit.isVisible()}}"></widget-img-field>
+	</widget-fieldset>
+	<div class="widget_area">
+		<widget-fieldset class="widget_name">
+			<textarea class="wfield wfield__textarea" data-ng-model="edit.widget.fields.name" data-ng-change="edit.autoSave()" placeholder="Name or names" data-field-autocomplete></textarea>
+		</widget-fieldset>
+		<widget-fieldset>
+			<textarea class="wfield wfield__textarea widget_text" data-ng-model="edit.widget.fields.text" data-ng-change="edit.autoSave()" placeholder="Description" data-field-autocomplete></textarea>
+		</widget-fieldset>
+	</div>
+</div>

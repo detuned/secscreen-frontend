@@ -1,0 +1,40 @@
+<div data-ng-controller="ImagesDialogCtrl" class="images-dialog" data-ng-class="{ 'images-dialog__loading' : isLoading }">
+	<div class="images-dialog_top">
+		<div class="images-dialog_header">
+			<h2 class="images-dialog_title">Choose an image</h2>
+			<ul class="images-dialog_sources-list">
+				<li class="images-dialog_source images-dialog_source__type-internal" data-ng-show="sources.internal" data-ng-class="{'images-dialog_source__active':source == 'internal'}" data-ng-click="setSource('internal')">
+					<span class="images-dialog_source_text">from Clipart</span>
+				</li>
+				<li class="images-dialog_source images-dialog_source__type-blitz" data-ng-show="sources.blitz" data-ng-class="{'images-dialog_source__active':source == 'blitz'}" data-ng-click="setSource('blitz')">
+					<span class="images-dialog_source_text">from Photo Feed</span>
+				</li>
+			</ul>
+		</div>
+		<div class="images-dialog_subheader images-dialog_subheader__internal" data-ng-show="source == 'internal'">
+			<ul class="images-dialog_internal-tags group-switches">
+				<li class="images-dialog_internal-tag group-switch" data-ng-repeat="filter in internalFilters" data-ng-bind="filter.title" data-ng-class="{ 'group-switch__active' : $index == activeInternalFilterId }" data-ng-click="switchInternalFilter( $index )"></li>
+			</ul>
+			<div class="images-dialog_tags">
+				<tags-input data-tags="internalUserTags" data-query="internalQuery" data-type="xxl,on-top" data-focus-on="{{isInternalTagsInputFocused}}"></tags-input>
+			</div>
+		</div>
+		<div class="images-dialog_subheader images-dialog_subheader__blitz" data-ng-show="source == 'blitz'">
+			<div class="images-dialog_tags">
+				<tags-input data-tags="tags" data-query="query" data-type="xxl,on-top" data-focus-on="{{isBlitzTagsInputFocused}}"></tags-input>
+			</div>
+		</div>
+	</div>
+	<div class="images-dialog_body" data-on-scroll-bottom="loadMore()" data-scroll-top="{{requestId}}">
+		<div class="images-dialog_result">
+			<div class="images-dialog_img" data-ng-repeat="img in results" data-ng-click="selectImage(img)" title="{{img.title}}">
+				<widget-img img="img" data-size="{{CONST.IMG_SIZE_SMALL}}" data-small></widget-img>
+				<div class="images-dialog_img-title" data-ng-bind="img.title|truncate:45" data-ng-show="img.title"></div>
+			</div>
+			<div class="images-dialog_empty-message" data-ng-class="{ 'images-dialog_empty-message__active' :  ! results.length && ! isLoading }">
+				<h3 class="images-dialog_empty-message_title">Nothing found</h3>
+				<p class="images-dialog_empty-message_text">Try to change your query</p>
+			</div>
+		</div>
+	</div>
+</div>

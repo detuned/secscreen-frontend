@@ -1,0 +1,16 @@
+<div class="widget_img button_wrap" data-ng-style="getContainerStyle()"  data-ng-class="{
+	'widget_img__busy' : isBusy,
+	'widget_img__croppable' : isCroppable,
+	'widget_img__draggable2crop' : isDraggableToCrop,
+	'widget_img__loading' : isImageLoading
+	}" data-image-droppable-zone="{ 'name' : 'widgetImgField' }" data-image-droppable-zone-data="{ 'id' : '{{dropId}}' }"><span class="button button__gray button__xxl" data-ng-bind="getImgUrl( img ) ? 'Replace image' : 'Load image'" data-ng-click="chooseImg()"></span>
+	<span class="button button__red button__icon widget_img_crop-button" data-ng-show="getImgUrl(img)"  data-ng-click="editImg()" title="Crop image"><span class="icon icon__crop"></span></span>
+	<div class="widget_img_cropped">
+		<span class="widget_img_cropped_dragger-arrows"></span>
+		<div class="widget_img_cropped_pic-wrapper">
+			<span class="widget_img_cropped_pic-holder"><!-- Img comes here --></span>
+			<span class="widget_img_cropped_dragger"></span>
+		</div>
+		<div class="widget_img_cropped_pic-bounds"></div>
+	</div>
+</div>

@@ -1,0 +1,402 @@
+$widget_mini_size: 80px
+$widget_small_size: 100px
+$widget_default_width: 300px
+
+.widget
+	display: inline-block
+	vertical-align: top
+	white-space: normal
+
+.widget_core
+	position: relative
+	background: #FFF
+	.widget__error &
+		background: #FBD9DC
+	.widget__used &
+		opacity: 0.3
+	.widget__used-times-1 &
+		opacity: 0.7
+	.widget__used-times-2 &
+		opacity: 0.5
+
+
+.widget_spinner
+	display: block
+	@include pos_full
+	@include transition(all 0.5s ease-in-out)
+	z-index: 10
+	background: #FFF image-url('loader_1.gif') no-repeat center
+	opacity: 0
+	visibility: hidden
+	.widget__loading &
+		opacity: 0.5
+		visibility: visible
+
+.widget_error
+	display: block
+	position: absolute
+	z-index: 3
+	top: 50%
+	left: 50%
+	margin: -13px 0 0 -12px
+	@include transition(all 0.5s ease-in-out)
+	@include sized-sprite($icons, error)
+	opacity: 0
+	visibility: hidden
+	.widget__error &
+		opacity: 1
+		visibility: visible
+
+.widget_busy
+	display: none
+	@include pos_full
+	z-index: 3
+	overflow: hidden
+	@include background-image(radial-gradient(center, ellipse cover, rgba(255,255,255,0.4) 0,rgba(255,255,255,0.8) 40px))
+	.icon__busy
+		position: absolute
+		top: 50%
+		left: 50%
+		margin: -22px 0 0 -12px
+	.widget__busy &
+		display: block
+
+
+.widget_editors
+	position: absolute
+	top: 50%
+	right: 5px
+	left: 5px
+	margin: 18px 0 0
+	text-align: center
+	font-size: 11px
+	line-height: 1.2
+.widget_editor
+	display: block
+	background: #797979
+	color: #FFF
+
+
+
+
+	
+
+.widget_view
+	@include trns(opacity)
+// Previews
+.widget__view-mini,
+.widget__view-small
+	@include noselect
+	.widget_core
+		cursor: default
+		-moz-user-select: none
+		-webkit-user-select: none
+		user-select: none
+		@include box-shadow(0 1px 2px rgba(0,0,0,0.25))
+		@include transition(width 0.2s ease-in-out, height 0.2s ease-in-out, box-shadow 0.3s)
+	&.widget__published .widget_core:after
+		display: block
+		@include pos_full
+		z-index: 1
+		content: ' '
+		@include box-shadow(inset 0 0 0 5px #58CB58)
+		opacity: 0.7 
+	&.widget__preloaded .widget_core:after
+		display: block
+		@include pos_full
+		z-index: 1
+		content: ' '
+		@include box-shadow(inset 0 0 0 5px #5EA9CB)
+		opacity: 0.7
+
+
+.widget__view-mini
+	.widget_core
+		width: $widget_mini_size
+		height: $widget_mini_size
+	.widget-hover & .widget_core
+		width: $widget_mini_size + 20
+		height: $widget_mini_size + 20
+
+.widget__view-small
+	.widget_core
+		width: $widget_small_size
+		height: $widget_small_size
+	.widget-hover & .widget_core
+		width: $widget_small_size + 20
+		height: $widget_small_size + 20
+
+
+// Widget actions
+.widget_actions
+	display: none
+	padding: 5px 0 0
+	text-align: center
+	.widget__loading &
+		visibility: hidden
+.widget_actions_header
+	display: block
+	@include tsh_light
+	color: #313131
+	font-size: 12px
+.widget_actions_buttons
+	display: block
+	white-space: nowrap
+.widget_actions_button
+	display: inline-block
+	padding: 3px 5px 4px
+	@include pt_r
+	font-size: 12px
+	line-height: 12px
+	cursor: pointer
+	border: 1px solid #C0C0C0
+	@include background-image(linear-gradient(top, #F4F4F4 0%, #D5D5D5 100%))
+	@include tsh_light
+	&:hover
+		@include background-image(linear-gradient(top, #F7F7F7 0%, #E1E1E1 100%))
+	&:active
+		padding: 4px 4px 3px 6px
+		text-shadow: none
+		@include box-shadow( inset 1px 1px rgba(0,0,0,0.3))
+		background: #D5D5D5
+.widget_actions_button__left
+	@include border-radius(4px 0 0 4px)
+.widget_actions_button__right
+	@include border-radius(0 4px 4px 0)
+	border-left-color: rgba(255,255,255,0.4)
+	@include background-image(linear-gradient(top, #E2E2E2 0%, #C3C3C3 100%))
+	&:hover
+		@include background-image(linear-gradient(top, #EAEAEA 0%, #D4D4D4 100%))
+	&:active
+		background: #C3C3C3
+.widget_actions_button__single
+	@include border-radius(4px)
+
+
+
+
+// Widget Preview Hover
+.widget-hover
+	position: absolute
+	z-index: 1001
+	background: #F6F6F6
+	visibility: hidden
+	opacity: 0.5
+	padding: 10px
+	@include box-shadow( 0 2px 12px rgba(0,0,0,0.45) )
+	@include box-sizing( border-box )
+	&.is-active
+		visibility: visible
+		opacity: 1
+	& .widget_actions
+		display: block
+	& .widget_core
+		@include box-shadow(none)
+	&.is-dragging-helper
+		width: 100px !important
+		min-height: 0 !important
+		height: 100px !important
+		overflow: hidden
+		opacity: 0.5
+		padding: 0
+		&>*:not(.widget_core)
+			visibility: hidden
+.widget_dragger
+	display: none
+	position: absolute
+	top: 0
+	right: 0
+	left: 0
+	height: 100px
+	z-index: 6
+	line-height: 6px
+	text-align: center
+	cursor: move
+	.icon
+		opacity: 0.5
+	&:hover .icon
+		opacity: 1
+	.widget-hover &
+		display: block
+	.widget__loading &
+		display: none
+
+.widget_delete
+	display: none
+	position: absolute
+	z-index: 7
+	top: -12px
+	right: -12px
+	width: 23px
+	height: 24px
+	line-height: 22px
+	text-align: center
+	@include border-radius( 50% )
+	@include box-shadow( 0 2px 3px rgba(0,0,0,0.4))
+	cursor: pointer
+	background: #e2e2e2
+	.widget-hover .widget__deletable &
+		display: block
+	.icon
+		opacity: 0.4
+	&:hover
+		background: #CBCBCB
+		@include box-shadow( 0 2px 3px rgba(0,0,0,0.8))
+	&:active
+		background: #c3c3c3
+		@include box-shadow( 0 1px 2px rgba(0,0,0,0.5))
+
+.icon__widget_drag
+	@include sized-sprite($icons, widget_drag)
+
+.icon__widget_star
+	@include sized-sprite($icons, widget_star)
+
+.icon__widget_info
+	@include sized-sprite($icons, widget_info)
+
+//	Widget options icons
+.widget_options
+	display: block
+	position: absolute
+	top: -6px
+	left: -1px
+	z-index: 2
+	.widget-hover &
+		display: none
+.widget_option
+	display: inline-block
+	vertical-align: top
+	margin: 0 1px
+	min-width: 18px
+	height: 18px
+	padding: 4px
+	@include box-sizing( border-box )
+	text-align: center
+	.icon
+		vertical-align: top
+.widget_option__star
+	background: rgba(221,213,83,0.8)
+.widget_option__info
+	background: rgba(57,163,72,0.8)
+
+
+// Widget edit options
+.widget_edit-options
+	display: none
+	position: absolute
+	top: 12px
+	left: 12px
+	z-index: 7
+	white-space: nowrap
+	.widget-hover &
+		display: block
+.widget_edit-option
+	display: inline-block
+	vertical-align: top
+	margin: 0 3px 2px 0
+	padding: 3px 4px
+	line-height: 1
+	text-align: center
+	@include box-shadow(1px 1px 2px rgba(0,0,0,0.75))
+	cursor: pointer
+.widget_edit-option_icon-wrap
+	display: block
+	padding-bottom: 2px
+.widget_edit-option__star
+	background: rgba(221,213,83,0.7)
+	@include trns(background)
+	&:hover
+		background: rgba(221,213,83,1)
+.widget_edit-option__info
+	background: rgba(57,163,72,0.7)
+	&:hover
+		background: rgba(57,163,72,1)
+
+.widget_edit-option_field
+	margin: 0
+	padding: 0
+	cursor: pointer
+	
+// Widget attach
+.widget_attach
+	position: absolute
+	z-index: 3
+	right: -8px
+	top: -8px
+	@include sized-sprite($icons, widget_attached)
+	@include box-sizing( border-box )
+	padding: 10px 14px 0 0
+	text-align: right
+	@include pt_r
+	@include tsh_light
+	font-size: 12px
+	white-space: nowrap
+	line-height: 1
+
+// Widget used counter
+.widget_used
+	display: none
+	position: absolute
+	right: 0
+	bottom: 0
+	height: 18px
+	line-height: 18px
+	padding: 0 6px
+	white-space: nowrap
+	font-size: 12px
+	color: #FFF
+	background: rgba(0,0,0,0.5)
+	.widget__used &
+		display: block
+
+
+// Widget ID (in special admin mode only)
+.widget_id
+	display: none
+	position: absolute
+	z-index: 2
+	bottom: 0
+	left: 0
+	height: 18px
+	line-height: 18px
+	padding: 0 6px
+	white-space: nowrap
+	font-size: 12px
+	@include pt_r
+	color: #FFF
+	background: #000
+	.is-widgets-verbose &
+		display: block
+
+// Widget dragging
+.widget.is-dragging
+	.widget_view
+		opacity: 0.3
+	.widget_core
+		background: #F3F3F3
+	.widget_options, .widget_attach
+		visibility: hidden
+
+
+// Edit widget
+.widget_fieldset
+	margin: 0 0 14px
+
+.wfield
+	border: 1px solid rgba(0, 0, 0, 0.2)
+	@include box-shadow(inset 2px 2px 3px rgba(0,0,0,0.15))
+	@include border-radius(4px)
+	@include box-sizing( border-box )
+	padding: 2px 4px
+	width: 100%
+	background: #FFF
+	font: inherit
+	line-height: 1.2
+.wfield__textarea
+	height: 80px
+	resize: none
+
+.widget_area
+	padding-right: 12px
+	padding-left: 12px

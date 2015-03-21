@@ -1,0 +1,9 @@
+<div class="folder_engine" data-ng-controller="FolderTypeLibCtrl">
+	<span class="folder_icon"></span>
+	<div class="folder_content" data-ng-class="{'folder_content__loading': searchState.loading}">
+		<folder-widgets-list data-on-not-complete="loadMore()"  data-report-capacity data-orientation="{{folder.state.fullscreen? 'ver' : 'hor' }}" data-total-capacity="{{widgets.length}}"></folder-widgets-list>
+		<div class="folder_tags">
+			<tags-input data-tags="tags" data-type="compact" data-query="query.value" data-allow-add-tags></tags-input>
+		</div>
+	</div>
+</div>

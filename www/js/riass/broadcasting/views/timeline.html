@@ -1,0 +1,34 @@
+<div data-ng-controller="TimelineCtrl" class="timeline" data-ng-class="{
+	'timeline__zoom-in':zoomLevel == TIMELINE_CONST.ZOOM_LEVEL_IN,
+	'timeline__zoom-out':zoomLevel == TIMELINE_CONST.ZOOM_LEVEL_OUT,
+	'timeline__empty' : ! widgets.published.length && ! widgets.notPublished.length,
+	'timeline__loading' : state.loading,
+	'timeline__bootstraping' : state.bootstraping,
+	'timeline__disabled' : state.disabled
+	}" data-timeline-widget-droppable data-timeline-scroll-control="needCentering">
+	<panel-ext-header>
+		<div class="timeline_stat">
+			<p class="timeline_stat_item timeline_stat_item__last-publish" data-ng-show="timeFromLastPublication" data-ng-class="{ 'timeline_stat_item__warn' : publicationPauseWarning }"><span class="timeline_stat_item_label">Passed since last publication:</span> <span class="timeline_stat_item_value" data-ng-bind="timeFromLastPublication"></span></p>
+			<p class="timeline_stat_item timeline_stat_item__num-publish" data-ng-show="broadcasting.status == CONST.BROADCASTING_STATUS_ON || getPublishedNum()"><span class="timeline_stat_item_label">Widgets sent:</span> <span class="timeline_stat_item_value" data-ng-bind="getPublishedNum()">0</span></p>
+		</div>
+		<panel-buttons data-family="timeline" data-separate="both">
+			<panel-button data-ng-repeat="button in zoomButtons" data-type="{{button.type}}" data-view="wide" data-family="timeline" data-is-active="button.zoomLevel == zoomLevel" data-title="{{button.title}}" data-ng-click="zoomAction(button)"></panel-button>
+		</panel-buttons>
+	</panel-ext-header>
+	<div class="timeline_feed">
+		<div class="timeline_feed-core">
+			<div class="timeline_widgets-set timeline_widgets-set__published">
+				<div data-ng-repeat="widgetData in widgets.published" class="timeline_widget-wrap">
+					<widget-preview data-id="widgetData.id" data-view="widgetsViewMap[zoomLevel]"></widget-preview>
+				</div>
+			</div>
+			<div class="timeline_line"></div>
+			<div class="timeline_widgets-set timeline_widgets-set__unpublished" data-timeline-widgets>
+				<div data-ng-repeat="widgetData in widgets.notPublished" >
+					<widget-preview data-id="widgetData.id" data-view="widgetsViewMap[zoomLevel]" data-zone="timeline" data-timeline-widget="widgetData" data-delete="removeWidgetFromTimeline(widgetData)" data-loaded="onUnpublishedWidgetLoaded"></widget-preview>
+				</div>
+			</div>
+			<div class="timeline_disabled-msg">Widgets publication and preloading are disallowed for this broadcasting</div>
+		</div>
+	</div>
+</div>

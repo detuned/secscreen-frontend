@@ -1,0 +1,10 @@
+<div data-ng-controller="WidgetQuestionCtrlEdit">
+	<div class="widget_area">
+	<widget-fieldset>
+		<input type="text" class="wfield wfield__text widget_title" data-ng-model="edit.widget.fields.title" data-ng-change="edit.autoSave()" data-widget-field-autofocus />
+	</widget-fieldset>
+	<widget-fieldset>
+		<textarea class="wfield wfield__textarea" data-ng-model="edit.widget.fields.text" data-ng-change="edit.autoSave()"></textarea>
+	</widget-fieldset>
+	</div>
+</div>

@@ -1,0 +1,462 @@
+.panel__workspace
+	background: inline-image('workspace_bg.png')
+.workspace
+	display: block
+	@include pos_full
+	.panel_ext-header
+		left: 2px
+.workspace_core
+	@include pos_full
+	overflow: auto
+.workspace_desk
+	padding: 20px
+	.workspace__tight &
+		text-align: center
+
+.icon__workspace-create
+	@include sized-sprite($icons, item_create)
+	.panel_button:active &
+		@include sized-sprite($icons, item_create_active)
+
+.workspace_widget-wrap
+	position: relative
+	display: inline-block
+	margin: 0 20px 20px 0
+	vertical-align: top
+	text-align: left
+
+//Workspace widget (ws-widget)
+.ws-widget
+	position: relative
+	width: 400px
+	@include transition( transform 0.2s ease-out, height 0.2s ease-in-out )
+	&.ui-draggable-dragging
+		z-index: 1000
+		width: 100px !important
+		min-height: 0 !important
+		height: 100px !important
+		overflow: hidden
+		opacity: 0.5
+		padding: 0
+		background: #FFF
+		@include box-shadow( 0 3px 6px rgba(0,0,0,0.4))
+		@include transition( none )
+		&>*
+			visibility: hidden !important
+
+.ws-widget_header
+	position: relative
+	height: 26px
+	line-height: 26px
+	white-space: nowrap
+	overflow: hidden
+	padding: 0 8px
+	font-size: 0.9em
+	background: #D1D1D1
+	.ws-widget__published &
+		background: #86D97E
+	.ws-widget__preloaded &
+		background: #73c7e6
+.ws-widget_dragger
+	display: block
+	position: absolute
+	top: 0
+	right: 26px
+	left: 0
+	z-index: 10
+	height: 26px
+	cursor: move
+.ws-widget_close-button
+	display: block
+	position: absolute
+	top: 0
+	right: 0
+	bottom: 0
+	width: 26px
+	cursor: pointer
+	text-align: center
+	line-height: 24px
+	background: rgba(0, 0, 0, 0)
+	@include trns(background)
+	.icon
+		opacity: 0.4
+	&:hover
+		background: rgba(0, 0, 0, 0.05)
+
+.ws-widget_status
+	@include opacity(0.6)
+	color: #000
+.ws-widget_busy
+	display: none
+	height: 26px
+	line-height: 26px
+	white-space: nowrap
+	margin-left: 12px
+	padding: 0 12px
+	border: 1px solid #BCBCBC
+	border-width: 0 1px
+	background: rgba(255,255,255,0.2)
+	.icon
+		position: relative
+		top: -2px
+	.ws-widget__busy &
+		display: inline-block
+
+// Widget id
+.ws-widget_id
+	display: none
+	position: absolute
+	top: 0
+	right: 26px //Next to close button
+	bottom: 0
+	text-align: center
+	padding: 0 5px
+	line-height: 24px
+	background: #000
+	font-size: 12px
+	color: #FFF
+	.is-widgets-verbose &
+		display: block
+
+
+.ws-widget_editor
+	margin: 0 0 0 6px
+	color: #6B6B6B
+	:after
+		content: ', '
+	:last-child
+		:after
+			display: none
+
+.ws-widget_core
+	position: relative
+
+.ws-widget_state
+	position: relative
+	display: block
+	width: 100%
+	background: #FCFCFC
+	@include box-shadow( 0 3px 6px rgba(0,0,0,0.4) )
+	@include transition( box-shadow 1s ease-in-out )
+	.ws-widget__highlighted &
+		@include box-shadow( 0 3px 30px #FFD600 )
+		@include transition( box-shadow 0.6s ease-in-out )
+
+.ws-widget_body
+	padding: 12px 0 0
+
+.ws-widget_state__edit
+	background: #F7F7F7
+	.ws-widget__state-view &
+		display: none
+
+.widget_display__view
+	@include noselect(text)
+	.widget_area
+		padding-right: 25px
+		padding-left: 25px
+.ws-widget_state__view
+	.ws-widget_footer
+		background: rgba(0, 0, 0, 0.01)
+		&>*
+			opacity: 0
+			@include trns(opacity)
+	.ws-widget_status
+		@include tsh_light
+	.ws-widget_body
+		padding-top: 0
+	&:hover
+		.ws-widget_footer
+			background: rgba(0,0,0,0.06)
+			&>*
+				opacity: 1
+	.ws-widget__state-edit &
+		display: none
+
+// Flippable
+.ws-widget__flippable
+	@include perspective(1000px)
+	.ws-widget_state
+		@include backface-visibility( hidden )
+	.ws-widget_core
+		position: absolute
+		top: 0
+		left: 0
+		width: 100%
+		@include transform-style(preserve-3d)
+	&.ws-widget__state-edit .ws-widget_core
+		@include transform(rotateY(-180deg))
+	.ws-widget_state__view,
+	.ws-widget_state__edit
+		position: absolute
+		top: 0
+		left: 0
+		display: block !important
+	.ws-widget_state__edit
+		@include transform(rotateY(180deg))
+	.ws-widget_state__view
+		.ws-widget__state-edit &
+			display: block
+	.ws-widget_footer
+		display: none
+
+// Flipping
+.ws-widget__flipping
+	.ws-widget_core
+		@include transition(transform 0.5s ease)
+
+
+
+.ws-widget_public-button
+	float: right
+
+.ws-widget_remove-button
+	float: right
+
+.ws-widget_about-remove
+	visibility: hidden
+	opacity: 0
+	position: absolute
+	right: 0
+	bottom: 0
+	left: 0
+	padding: 12px 24px
+	background: rgba(167,43,43,0.9)
+	@include box-shadow(0 0 2px rgba(0,0,0,0.1))
+	text-align: center
+	color: #FFF
+	@include trns(opacity)
+	.ws-widget_about-remove_title
+		@include ptn_b
+		margin: 0 0 2px
+		font-size: 1.1em
+		color: rgba(255,255,255,0.9)
+		line-height: 1.2
+		@include tsh_darker
+	.ws-widget_about-remove_text
+		margin: 0 0 8px
+		color: rgba(255,255,255,0.8)
+		line-height: 1.2
+		@include tsh_darker
+		@include ptn_r
+	.ws-widget__about-remove &
+		visibility: visible
+		opacity: 1
+.ws-widget__about-remove .ws-widget_state__edit .ws-widget_footer
+	visibility: hidden
+
+
+
+
+
+
+.ws-widget_attach
+	position: relative
+	padding: 0 0 12px 15px
+	min-height: 15px
+	line-height: 1
+.ws-widget_attach_icon
+	position: absolute
+	top: 0
+	left: -7px
+.ws-widget_attach_item
+	display: inline-block
+	vertical-align: top
+	margin: 0 12px 0 0
+	color: #5C5C5C
+	font-size: 0.8em
+	.widget_text
+		border-bottom: 1px dotted #A8A8A8
+		cursor: pointer
+		&:hover
+			border-color: #858585
+			color: #595959
+.ws-widget_attach_item_close
+	display: inline-block
+	vertical-align: middle
+	opacity: 0.3
+	width: 12px
+	height: 12px
+	text-align: center
+	line-height: 8px
+	cursor: pointer
+	.ws-widget_attach_item:hover &
+		opacity: 0.8
+
+	
+	
+.ws-widget_footer
+	background: rgba(0,0,0,0.06)
+	padding: 10px 18px
+	opacity: 1
+	@include transition(opacity 0.5s ease-in-out)
+	.ws-widget__loading &
+		opacity: 0
+
+// Options
+.ws-widget_options
+	display: inline-block
+	vertical-align: top
+	margin: 0 4px 0 -8px
+.ws-widget_option
+	display: inline-block
+	vertical-align: middle
+	margin: 0 0 2px 0
+	padding: 4px
+	line-height: 1
+	text-align: center
+	//@include box-shadow(1px 1px 2px rgba(0,0,0,0.75))
+	cursor: pointer
+.ws-widget_option__readonly
+	padding-right: 0
+	padding-left: 0
+
+.ws-widget_option_icon-wrap
+	display: inline-block
+	vertical-align: middle
+	padding: 0 6px 2px
+	.icon
+		vertical-align: middle
+
+.ws-widget_option__star
+	background: #DCD552
+	&:hover
+		background: #ECE458
+.ws-widget_option__info
+	background: #39A348
+	&:hover
+		background: #49D25D
+.ws-widget_option_field
+	margin: 0
+	padding: 0
+	cursor: pointer
+	vertical-align: middle
+	
+// Tags
+.ws-widget_tags
+	display: block
+	margin: 0 -3px 12px
+
+
+.ws-widget_spinner
+	display: block
+	@include pos_full
+	@include transition(all 0.5s ease-in-out)
+	z-index: 10
+	background: #FFF image-url('loader_1.gif') no-repeat center
+	opacity: 0
+	visibility: hidden
+	.ws-widget__loading &
+		opacity: 0.5
+		visibility: visible
+
+.ws-widget__removing
+	@include transform( scale(0) )
+
+.ws-widget_error-msg
+	margin: 0 0 12px
+	font-size: 0.9em
+	color: #F00
+
+.ws-widget_note
+	margin: 0 -8px 12px
+	padding: 3px 8px
+	font-size: 0.9em
+	line-height: 1
+.ws-widget_note__warn
+	background: #F6F0BC
+	color: rgba(0, 0, 0, 0.7)
+
+
+// Create new widget
+.ws-widget_state__create
+	display: none
+	background: #F0F0F0
+	.ws-widget_footer
+		background: none
+.ws-widget__create
+	.ws-widget_state
+		display: none
+	.ws-widget_state__create
+		display: block
+.ws-widget_create
+	.ws-widget_create_header
+		@extend %clr
+		padding-bottom: 6px
+	.ws-widget_create_title
+		float: left
+		margin: 0 12px 5px 0
+	.widget_create_filter_wrap
+		overflow: hidden
+	.ws-widget_create_filter
+		width: 100%
+		@include box-sizing( border-box )
+		@include border-radius( 1em )
+		border: 1px solid #C0C0C0
+		padding: 0.2em 0.5em
+		background: #FFF
+		@include trns
+		opacity: 0.5
+		&:focus
+			opacity: 1
+			outline: none
+			@include box-shadow( inset 0 1px 1px rgba(0,0,0,0.1) )
+	.ws-widget_create_pane
+		max-height: 290px
+		background: #EFEFEF
+		overflow-x: hidden
+		overflow-y: auto
+	.ws-widget_create_item
+		position: relative
+		margin: 0 0 1px
+		padding: 8px 12px 10px 40px
+		@include pt_r
+		@include transition( box-shadow 0.2s ease-out, background 0.2s ease-out )
+		background: #FFF
+		color: #2D2D2D
+		cursor: pointer
+	.ws-widget_create_item__base
+		font-weight: bold
+	.ws-widget_create_item__active
+		@include background-image(linear-gradient(top, #70B0D8 0%, #6AA7CD 100%))
+		@include box-shadow( inset 0 0 6px rgba(0,0,0,0.3) )
+		cursor: default
+		color: #FFF
+		text-shadow: 0 1px rgba(0,0,0,0.2)
+.ws-widget_create_icon
+	display: block
+	position: absolute
+	top: 50%
+	left: 10px
+	margin: -10px 0 0
+	.ws-widget_create_item__default &
+		@include sized-sprite($icons, widget_type_default)
+	.ws-widget_create_item__active.ws-widget_create_item__default &
+		@include sized-sprite($icons, widget_type_default_active)
+	.ws-widget_create_item__goal &
+		@include sized-sprite($icons, widget_type_goal)
+	.ws-widget_create_item__active.ws-widget_create_item__goal &
+		@include sized-sprite($icons, widget_type_goal_active)
+	.ws-widget_create_item__person &
+		@include sized-sprite($icons, widget_type_person)
+	.ws-widget_create_item__active.ws-widget_create_item__person &
+		@include sized-sprite($icons, widget_type_person_active)
+	.ws-widget_create_item__poll &
+		@include sized-sprite($icons, widget_type_poll)
+	.ws-widget_create_item__active.ws-widget_create_item__poll &
+		@include sized-sprite($icons, widget_type_poll_active)
+	.ws-widget_create_item__answer &
+		@include sized-sprite($icons, widget_type_answer)
+	.ws-widget_create_item__active.ws-widget_create_item__answer &
+		@include sized-sprite($icons, widget_type_answer_active)
+	.ws-widget_create_item__finish &
+		@include sized-sprite($icons, widget_type_finish)
+	.ws-widget_create_item__active.ws-widget_create_item__finish &
+		@include sized-sprite($icons, widget_type_finish_active)
+	.ws-widget_create_item__game_moment &
+		@include sized-sprite($icons, widget_type_game_moment)
+	.ws-widget_create_item__active.ws-widget_create_item__game_moment &
+		@include sized-sprite($icons, widget_type_game_moment_active)
+
+
+

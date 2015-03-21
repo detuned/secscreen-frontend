@@ -1,0 +1,7 @@
+<div class="image-preview" title="{{item.title}}" data-ng-controller="ImagePreviewCtrl" data-ng-class="[
+	image.title ? 'image-preview__titled' : ''
+	]" data-ng-dblclick="createWidgetFromItem()">
+	<widget-img img="image" data-size="{{CONST.IMG_SIZE_SMALL}}" data-small data-cover="full"></widget-img>
+	<div class="image-preview_title" data-ng-bind="image.title|truncate:45"></div>
+	<span class="image-preview_dragger"></span>
+</div>

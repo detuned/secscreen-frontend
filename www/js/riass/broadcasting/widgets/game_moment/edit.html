@@ -1,0 +1,20 @@
+<div data-ng-controller="WidgetGameMomentCtrlEdit">
+	<div class="widget_area">
+		<widget-fieldset>
+			<input type="text" class="wfield wfield__text widget_title" data-ng-model="edit.widget.fields.title" data-ng-change="edit.autoSave()" data-widget-field-autofocus data-field-autocomplete />
+		</widget-fieldset>
+		<widget-fieldset class="icon_img">
+			<widget-img-field data-img="edit.widget.fields.img" data-change="edit.autoSave" data-size="{{CONST.IMG_SIZE_SMALL}}" data-sources="[CONST.IMG_EXPORT_TYPE_INTERNAL]" data-default-internal-tags="[CONST.IMG_TAG_ICONS]"></widget-img-field>
+		</widget-fieldset>
+		<widget-fieldset class="widget_person widget_person__picture widget_person__pictured">
+			<div class="widget_person_picture">
+				<widget-img-field data-img="edit.widget.fields.person.img" data-change="edit.autoSave" data-size="{{CONST.IMG_SIZE_SMALL}}" data-sources="[CONST.IMG_EXPORT_TYPE_INTERNAL]" data-default-internal-tags="[CONST.IMG_TAG_FLAG]"></widget-img-field></div>
+			<div class="widget_person_text">
+				<textarea class="wfield wfield__textarea" data-ng-model="edit.widget.fields.person.text" data-ng-change="edit.autoSave()" data-field-autocomplete></textarea>
+			</div>
+		</widget-fieldset>
+		<widget-fieldset>
+			<textarea class="wfield wfield__textarea widget_text" data-ng-model="edit.widget.fields.text" data-ng-change="edit.autoSave()" data-field-autocomplete></textarea>
+		</widget-fieldset>
+	</div>
+</div>

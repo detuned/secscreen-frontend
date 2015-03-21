@@ -1,0 +1,6 @@
+<div class="tags-input" data-ng-class="type ? 'tags-input__type-' + type : ''">
+	<div class="tags-input_list">
+		<span data-ng-repeat="tag in tags" class="tag" data-ng-class="{'tag__new' : isTagNew( tag ), 'tag__default' : isTagDefault( tag )}"><span class="tag_title" data-ng-bind="tag" title="{{tag}}"></span><span class="tag_delete" data-ng-click="removeTag(tag, $event)">×</span></span>
+		<span class="tags-input_query" data-ng-bind="query" data-ng-hide=" ! query "></span>
+	</div>
+</div>

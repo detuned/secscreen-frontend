@@ -1,0 +1,9 @@
+<div class="widget-full" data-ng-controller="WidgetDefaultCtrl">
+	<div class="widget_area">
+		<div class="widget_title" data-ng-bind-html-unsafe="widget.fields.title|parseTextField:widget.attach"></div>
+	</div>
+	<widget-img img="widget.fields.img" data-size="{{CONST.IMG_SIZE_FULL}}"></widget-img>
+	<div class="widget_area">
+		<div class="widget_text" data-ng-bind-html-unsafe="widget.fields.text|parseTextField:widget.attach"></div>
+	</div>
+</div>

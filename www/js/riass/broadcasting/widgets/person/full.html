@@ -1,0 +1,7 @@
+<div class="widget_preview" data-ng-controller="WidgetPersonCtrl">
+	<widget-img img="widget.fields.img" data-size="{{CONST.IMG_SIZE_FULL}}"></widget-img>
+	<div class="widget_area">
+		<div class="widget_name" data-ng-bind-html-unsafe="widget.fields.name|nl2br|parseTextField:widget.attach"></div>
+		<div class="widget_text" data-ng-bind-html-unsafe="widget.fields.text|parseTextField:widget.attach"></div>
+	</div>
+</div>

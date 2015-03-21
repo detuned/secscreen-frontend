@@ -1,0 +1,238 @@
+//variables
+$bg_dark: #262626
+
+@mixin header_section
+	float: left
+	height: $header_height
+	line-height: $header_height
+	padding: 0 20px
+	white-space: nowrap
+	position: relative
+	&:before
+		display: block
+		position: absolute
+		top: 0
+		bottom: 0
+		left: 0
+		width: 1px
+		@include background-image(linear-gradient(top, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%))
+		border-right: 1px solid #000
+		content: ' '
+
+@mixin header_link( $opacity:0.3 )
+	@include trns
+	@include tsh_dark
+	color: #FFF
+	opacity: $opacity
+	cursor: pointer
+	background: $bg_dark
+	&:hover
+		opacity: 1
+		background: #000
+
+.header
+	position: relative
+	z-index: 5
+	height: $header_height
+	background: $bg_dark
+	font-size: 0.88em
+	@extend %clr
+	@include pt_r
+	@include box-shadow(0 0 6px rgba(0,0,0,.4))
+
+.logo
+	@include header_section
+	@include header_link( 0.3 )
+	@include pt_b
+	font-size: 1.15em
+	padding: 0 40px
+	text-decoration: underline
+	&:before
+		display: none
+
+
+.broadcasting-state-wrap
+	float: left
+	position: relative
+.broadcasting-state
+	@include header_section
+	@include tsh_dark
+	font-size: 0.85em
+	color: #b71723
+	.is-broadcasting-on &
+		color: #10bd10
+		text-shadow: 0 0 5px #10bd10
+	.is-broadcasting-done &
+		color: #818181
+.broadcasting-state-warn
+	position: absolute
+	top: -300px
+	left: 50%
+	z-index: 3
+	opacity: 0
+	margin: 5px 0 0 -140px
+	background: #FFA500
+	color: #FFF
+	padding: 24px
+	line-height: 1.3
+	font-size: 1.5em
+	width: 250px
+	text-align: center
+	@include box-shadow(0 5px 5px rgba(0,0,0,0.3))
+	@include trns
+	&:before
+		display: block
+		position: absolute
+		top: -7px
+		left: 50%
+		width: 15px
+		height: 15px
+		margin: 0 0 0 -7px
+		@include transform(rotate(45deg))
+		background: #FFA500
+		content: ' '
+	&.broadcasting-state-warn__active
+		top: 100%
+		opacity: 1
+.broadcasting-state-warn_close
+	position: absolute
+	top: 0
+	right: 0
+	width: 24px
+	height: 24px
+	line-height: 20px
+	text-align: center
+	opacity: 0.2
+	cursor: pointer
+	&:hover
+		opacity: 1
+
+
+.broadcasting-sport-button
+	display: inline-block
+	vertical-align: middle
+	margin: 5px 0 0 20px
+	opacity: 0.5
+	&:hover
+		opacity: 1
+
+
+.header-dropdown
+	position: relative
+	float: left
+
+.header-dropdown_title
+	@include header_section
+	@include header_link
+	position: relative
+	z-index: 2
+	min-width: 150px
+	padding-right: 35px
+	.header-dropdown__active &
+		opacity: 1 !important
+		background: #000 !important
+	&:after
+		display: block
+		position: absolute
+		top: 50%
+		right: 17px
+		@include sized-sprite($icons,dropdown_1)
+		content: ' '
+
+.header-dropdown_body
+	//display: none
+	position: absolute
+	right: -2px
+	left: 0
+	z-index: 1
+	top: $header_height
+	max-height: 300px
+	margin-top: -350px
+	background: $bg_dark
+	color: #D0D0D0
+	@include border-radius(0 0 10px 10px)
+	@include box-shadow(0 5px 5px rgba(0,0,0,0.9))
+	@include trns(margin-top)
+	.header-dropdown__active &
+		margin-top: 0
+
+
+.header-dropdown__broadcasting
+	float: left
+	.header-dropdown_title
+		min-width: 200px
+		@include header_link( 0.7 )
+
+// The body of broadcasting dropdown
+.broadcasting-control
+	margin: 0 4px
+
+.broadcasting-control_settings
+	display: block
+	padding: 15px 45px
+	@include trns
+	cursor: pointer
+	opacity: 0.7
+	.icon
+		margin: 0 6px 0 -26px
+	.broadcasting-control_settings_text
+		line-height: 1.5
+		text-decoration: underline
+		color: #FFF
+	&:hover
+		opacity: 1
+
+.broadcasting-control_status
+	display: none
+	border-top: 1px solid #313131
+	padding: 20px 20px 30px
+
+.broadcasting-control_change-status
+	display: none
+
+.is-broadcasting-off .broadcasting-control_change-status__off,
+.is-broadcasting-on .broadcasting-control_change-status__on,
+.is-broadcasting-done .broadcasting-control_change-status__done
+	display: block
+
+.is-broadcasting-service
+	.broadcasting-control_change-status__off,
+	.is-broadcasting-service .broadcasting-control_change-status__on,
+	.is-broadcasting-service .broadcasting-control_change-status__done
+		display: none
+	.broadcasting-control_change-status__service
+		display: block
+
+.broadcasting-control_status_text
+	margin: 10px 0 0
+	@include tsh_dark
+	font-size: 0.85em
+	color: #D0D0D0
+
+.header-dropdown__layout
+	float: right
+
+//Layout switcher
+.layout-switch
+	display: block
+//.layout-switch_list
+.layout-switch_item
+	display: block
+	padding: 6px 20px 8px
+	border-bottom: 1px solid #515151
+	@include tsh_dark
+	cursor: pointer
+	background: $bg_dark
+	color: #AAA
+	&:last-child
+		border: none
+		@include border-radius(0 0 10px 10px)
+	&:hover
+		background: #8F8F8F
+		color: #262626
+		text-shadow: none
+
+.header_user
+	@include header_section
+	@include header_link
+	float: right

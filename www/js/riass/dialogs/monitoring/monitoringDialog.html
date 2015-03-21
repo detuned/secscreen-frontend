@@ -1,0 +1,35 @@
+<div data-ng-controller="MonitoringDialogCtrl" class="monitoring-dialog"  data-ng-class="{ 'monitoring-dialog__loading' : isLoading, 'monitoring-dialog__fullview' : isFullView  }">
+	<div class="monitoring-dialog_top">
+		<div class="monitoring-dialog_header">
+			<h2 class="monitoring-dialog_title">Users monitoring</h2>
+			<ul class="group-switches" data-ng-show="getActivitiesNum()">
+				<li class="group-switch" data-ng-class="{ 'group-switch__active' : ! isFullView }" data-ng-click="isFullView = false">Less</li><li class="group-switch" data-ng-class="{ 'group-switch__active' : isFullView }" data-ng-click="isFullView = true">More</li>
+			</ul>
+		</div>
+	</div>
+	<div class="monitoring-dialog_body">
+		<div class="monitoring-dialog_items">
+			<div class="monitoring-dialog_item" data-ng-repeat="item in activities">
+				<div class="monitoring-dialog_user">
+					<span class="monitoring-dialog_user-name" data-ng-bind="item.user.name"></span>
+					<div class="monitoring-dialog_user_actions" data-ng-show="isRemoteControlAllowed">
+						<span class="button button__red button__compact" data-ng-click="userRemoteControl(item.user)">Control</span>
+					</div>
+				</div>
+				<div class="monitoring-dialog_log"  data-scroll-top="{{item.log.length}}">
+					<ul class="monitoring-dialog_log-items">
+						<li data-ng-repeat="activity in item.log" class="monitoring-dialog_activity" title="{{activity.date|date:'HH:mm:ss'}}" data-ng-click="dumpActivity(activity)">
+							<span data-ng-bind="activity.msg" class="monitoring-dialog_activity-msg"></span>
+							<span data-ng-show="activity.repeat > 1" data-ng-bind="activity.repeat" class="monitoring-dialog_activity-repeat"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="monitoring-dialog_empty-message"
+				data-ng-class="{ 'monitoring-dialog_empty-message__active' :  ! getActivitiesNum() }">
+			<h3 class="monitoring-dialog_empty-message_title">No users activity registered</h3>
+			<p class="monitoring-dialog_empty-message_text">Waiting...</p>
+		</div>
+	</div>
+</div>

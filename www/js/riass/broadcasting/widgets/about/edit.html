@@ -1,0 +1,20 @@
+<div data-ng-controller="WidgetAboutCtrlEdit">
+	<div class="widget_area">
+		<widget-fieldset>
+			<input type="text" class="wfield wfield__text widget_title" data-ng-model="edit.widget.fields.title" data-ng-change="edit.autoSave()" data-widget-field-autofocus />
+		</widget-fieldset>
+		<widget-fieldset>
+			<widget-img-field data-img="edit.widget.fields.img" data-change="edit.autoSave"  data-sources="[CONST.IMG_EXPORT_TYPE_VR, CONST.IMG_EXPORT_TYPE_BLITZ, CONST.IMG_EXPORT_TYPE_INTERNAL]" data-default-source="CONST.IMG_EXPORT_TYPE_BLITZ" data-size="{{CONST.IMG_SIZE_FULL}}" data-default-base-tags="edit.widget.tags" data-croppable data-is-visible="{{edit.isVisible()}}"></widget-img-field>
+		</widget-fieldset>
+		<widget-fieldset class="icon_img">
+			<widget-img-field data-img="edit.widget.fields.icon" data-change="edit.autoSave" data-size="{{CONST.IMG_SIZE_SMALL}}" data-sources="[CONST.IMG_EXPORT_TYPE_INTERNAL]" data-default-internal-tags="[CONST.IMG_TAG_SPORTS]"></widget-img-field>
+		</widget-fieldset>
+		<widget-fieldset>
+			<textarea class="wfield wfield__textarea" data-ng-model="edit.widget.fields.text" data-ng-change="edit.autoSave()"></textarea>
+		</widget-fieldset>
+		<widget-fieldset class="facts" data-ng-repeat="i in [0,1,2,3,4]">
+			<input type="text" class="wfield wfield__text" data-ng-model="edit.widget.fields.table[i].column1_text" data-ng-change="edit.autoSave()" />
+			<textarea class="wfield wfield__textarea" data-ng-model="edit.widget.fields.table[i].column2_text" data-ng-change="edit.autoSave()"></textarea>
+		</widget-fieldset>
+	</div>
+</div>

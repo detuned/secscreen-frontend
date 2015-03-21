@@ -1,0 +1,11 @@
+<div data-ng-controller="PublishDialogCtrl" class="publish-dialog">
+	<h2 class="publish-dialog_title">Publication</h2>
+	<div class="publish-dialog_widget"><!-- placeholder for widget view --></div>
+	<div class="publish-dialog_text">Warning! Publication will lead to immediate sending widget to hundred thousand users.</div>
+	<div class="publish-dialog_submit">
+		<div class="publish-dialog_submit-core">
+			<button class="button button__fire  button__xxl publish-dialog_submit-button" type="button" data-ng-class="{'button__disabled':isPublishing || isBlocked, 'button__loading' : isPublishing }" data-ng-click="publish()" data-ng-disabled="isPublishing || isBlocked" data-ng-bind="isBlocked ? ( 'Wait ' + blockedSeconds + ' sec.' ) : 'Publish'"></button>
+			<button class="button button__text publish-dialog_cancel-button" type="button" data-ng-click="cancel()">Don't publish</button>
+		</div>
+	</div>
+</div>

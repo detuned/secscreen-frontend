@@ -1,0 +1,58 @@
+.image-preview
+	position: relative
+	display: inline-block
+	vertical-align: top
+	width: 150px
+	margin: 0 1px 0 0
+	cursor: pointer
+	.widget_img
+		width: 150px
+		height: 100px
+	.widget_img__cover-full
+		background-size: cover
+.image-preview_dragger
+	display: none
+	@include pos_full
+	cursor: move
+	.image-preview-hover &
+		display: block
+
+
+.image-preview-hover
+	position: absolute
+	z-index: 1001
+	width: 150px
+	background: #F6F6F6
+	visibility: hidden
+	@include box-shadow( 0 2px 12px rgba(0,0,0,0.45) )
+	@include box-sizing( border-box )
+	.widget_img
+		width: 150px
+		height: 100px
+	&.is-active
+		visibility: visible
+		opacity: 1
+	&.is-dragging-helper
+		width: 150px !important
+		min-height: 0 !important
+		overflow: hidden
+		opacity: 0.5
+		padding: 0
+		.widget_img
+			width: 150px
+			height: 100px
+
+.image-preview_title
+	display: block
+	max-height: 40px
+	padding: 3px 6px 4px
+	overflow: hidden
+	text-overflow: ellipsis
+	white-space: normal
+	line-height: 1.1
+	font-size: 0.9em
+	@include box-sizing( border-box )
+	@include tsh_lighter
+	border-top: 1px solid #FFF
+	color: #4A4A4A
+	background: #E0E0E0

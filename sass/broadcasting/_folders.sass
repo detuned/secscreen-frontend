@@ -1,0 +1,268 @@
+$folder_header_height: 24px
+
+.folder
+	display: block
+	padding: $folder_header_height 0 0
+	position: relative
+	@include box-shadow(0 1px 0 rgba(0,0,0,0.15))
+.folder,
+.folder__color-id-0
+	background: #E4F0F4
+.folder__color-id-1
+	background: #B0FDAE
+.folder__color-id-2
+	background: #fdfac0
+.folder__color-id-3
+	background: #fef0e0
+
+.folder_header
+	position: absolute
+	top: 0
+	right: 0
+	left: 0
+	height: $folder_header_height
+	line-height: $folder_header_height
+	padding: 0 18px
+	white-space: nowrap
+	border-bottom: 1px solid rgba(255, 255, 255, 0.3)
+	background: rgba(0, 0, 0, 0.02)
+	cursor: pointer
+	&:hover
+		background: rgba(0, 0, 0, 0.03)
+	@extend %clr
+.folder_title
+	float: left
+.folder_stat
+	display: inline-block
+	vertical-align: top
+	position: absolute
+	top: -2px
+	margin: 0 0 0 4px
+	font-size: 10px
+	opacity: 0.4
+.folder_buttons
+	display: block
+	position: absolute
+	top: 0
+	right: 0
+	white-space: nowrap
+	text-align: right
+
+
+
+.folder_button
+	display: inline-block
+	vertical-align: top
+	width: $folder_header_height
+	height: $folder_header_height
+	text-align: center
+	line-height: $folder_header_height
+	opacity: 0.3
+	cursor: pointer
+	@include trns(opacity)
+	.folder:hover &
+		opacity: 0.8
+	&:hover,
+	.folder:hover &:hover
+		background: rgba(0, 0, 0, 0.05)
+		opacity: 1
+	.icon
+		display: block
+	&.is-active,
+	&:active
+		background: rgba(0, 0, 0, 0.1)
+		@include box-shadow( inset 1px 1px 1px rgba(0,0,0,0.2))
+
+.folder_button__add
+	left: 5px
+.folder_button__close
+	right: 0
+	@include border-radius(0 4px 0 0)
+
+.icon__folder-close
+	@include sized-sprite($icons, folder_close)
+.icon__folder-fullscreen
+	@include sized-sprite($icons, folder_fullscreen) 
+.icon__folder-add
+	@include sized-sprite($icons, folder_add)
+.icon__folder-drag
+	@include sized-sprite($icons, folder_drag)
+
+.folder_body
+	padding: 0 15px
+	height: 0
+	@include trns
+
+.folder_content
+	position: relative
+	overflow: hidden
+	height: 0
+	visibility: hidden
+	&:after
+		display: block
+		position: absolute
+		top: 35px
+		left: 50%
+		width: 20px
+		height: 20px
+		margin: 0 0 -10px -10px
+		@include border-radius(50%)
+		content: ' '
+		background-color: #FFF
+		background-image: image_url('loader_1.gif')
+		background-repeat: no-repeat
+		background-position: center
+		opacity: 0
+		@include trns
+	&.folder_content__loading:after
+		opacity: 1
+		visibility: visible
+
+.folder_icon
+	display: block
+	position: absolute
+	top: 3px
+	left: 2px
+
+.folder_dragger
+	display: block
+	position: absolute
+	top: 0
+	left: 50%
+	width: 100px
+	height: $folder_header_height
+	line-height: $folder_header_height
+	margin: 0 0 0 -50px
+	text-align: center
+	cursor: move
+	opacity: 0.5
+	@include trns(opacity)
+	.folder:hover &,
+	&:hover
+		opacity: 1
+	.storage_set__single &
+		display: none
+	
+.folder_tags
+	margin: 10px 0 0
+
+	
+.folder__opened,
+.folder__fullscreen
+	.folder_body
+		height: auto
+		padding-top: 10px
+		padding-bottom: 10px
+		visibility: visible
+	.folder_content
+		height: auto
+		visibility: visible
+	.folder_header
+		@include border-radius(4px 4px 0 0)
+
+// Fullscreen mode
+.folder__fullscreen
+	position: absolute
+	z-index: 10 !important
+	top: 0 !important
+	right: 2px !important
+	bottom: 2px !important
+	left: 2px !important
+	height: auto !important
+	@include border-radius(0)
+	.folder_header,
+	&.folder__opened .folder_header
+		@include border-radius(0)
+	.folder_body
+		position: absolute
+		top: 28px
+		right: 15px
+		left: 15px
+		bottom: 10px
+		@include border-radius(0)
+	.folder_icon
+		left: -12px
+		top: -24px
+	.folder_engine
+		@include pos_full
+	.folder_content
+		@include pos_full
+		&:after
+			top: 50%
+	.folder_tags
+		position: absolute
+		right: 0
+		bottom: 0
+		left: 0
+	.folder-widgets
+		position: absolute
+		top: 0
+		right: 0
+		bottom: 50px
+		left: 0
+		overflow-x: hidden
+		overflow-y: scroll
+		white-space: normal
+	.folder-widgets_core
+		white-space: normal
+	.folder-widgets_item
+		margin: 0 8px 8px 0
+
+
+//Widgets list inside folder
+.folder-widgets
+	position: relative
+	overflow-y: hidden
+	overflow-x: scroll
+	white-space: nowrap
+	min-height: 114px
+	padding-left: 5px
+
+
+.folder-widgets_core
+	display: inline-block
+	white-space: nowrap
+	padding: 6px 0
+	min-height: 80px
+
+.folder-widgets_item
+	display: inline-block
+	margin: 0 8px 0 0
+
+.folder-widgets_item__highlighted
+	.widget__view-mini .widget_core,
+	.widget__view-small .widget_core
+		@include box-shadow(0 1px 2px rgba(0,0,0,0.25), 0 1px 5px #F00)
+
+//Sytem folders
+.folder__settype-system
+	@include border-radius(0)
+	background: #F4F7F7
+	.folder_header
+		padding-left: 22px
+		@include border-radius(0)
+		background: #91949D
+		color: rgba(255,255,255,0.8)
+		&:hover
+			background: #A1A5AF
+	.folder_stat
+		opacity: 0.7
+	.icon__folder-fullscreen
+		@include sized-sprite($icons, folder_fullscreen_light)
+
+
+// Folder type 'lib'
+.folder__type-lib
+	.folder_icon
+		@include sized-sprite($icons, folder_type_lib)
+
+// Folder type 'starred'
+.folder__type-starred
+	.folder_icon
+		@include sized-sprite($icons, folder_type_starred)
+
+// Folder type 'starred'
+.folder__type-recent
+	.folder_icon
+		@include sized-sprite($icons, folder_type_recent)
+

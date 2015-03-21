@@ -1,0 +1,126 @@
+/* jquery.Jcrop.min.css v0.9.12 (build:20130521)
+
+.jcrop-holder
+	-ms-touch-action: none
+	direction: ltr
+	text-align: left
+
+.jcrop-vline, .jcrop-hline
+	background: white image_url('jcrop.gif')
+	font-size: 0
+	position: absolute
+
+.jcrop-vline
+	height: 100%
+	width: 1px!important
+	&.right
+		right: 0
+
+.jcrop-hline
+	height: 1px!important
+	width: 100%
+	&.bottom
+		bottom: 0
+
+.jcrop-tracker
+	-webkit-tap-highlight-color: transparent
+	-webkit-touch-callout: none
+	-webkit-user-select: none
+	height: 100%
+	width: 100%
+
+.jcrop-handle
+	background-color: #333
+	border: 1px #EEE solid
+	font-size: 1px
+	height: 7px
+	width: 7px
+	&.ord-n
+		left: 50%
+		margin-left: -4px
+		margin-top: -4px
+		top: 0
+	&.ord-s
+		bottom: 0
+		left: 50%
+		margin-bottom: -4px
+		margin-left: -4px
+	&.ord-e
+		margin-right: -4px
+		margin-top: -4px
+		right: 0
+		top: 50%
+	&.ord-w
+		left: 0
+		margin-left: -4px
+		margin-top: -4px
+		top: 50%
+	&.ord-nw
+		left: 0
+		margin-left: -4px
+		margin-top: -4px
+		top: 0
+	&.ord-ne
+		margin-right: -4px
+		margin-top: -4px
+		right: 0
+		top: 0
+	&.ord-se
+		bottom: 0
+		margin-bottom: -4px
+		margin-right: -4px
+		right: 0
+	&.ord-sw
+		bottom: 0
+		left: 0
+		margin-bottom: -4px
+		margin-left: -4px
+
+.jcrop-dragbar
+	&.ord-n, &.ord-s
+		height: 7px
+		width: 100%
+	&.ord-e, &.ord-w
+		height: 100%
+		width: 7px
+	&.ord-n
+		margin-top: -4px
+	&.ord-s
+		bottom: 0
+		margin-bottom: -4px
+	&.ord-e
+		margin-right: -4px
+		right: 0
+	&.ord-w
+		margin-left: -4px
+
+.jcrop-light
+	.jcrop-vline, .jcrop-hline
+		background: #FFF
+		filter: alpha(opacity = 70) !important
+		opacity: .70!important
+	.jcrop-handle
+		-moz-border-radius: 3px
+		-webkit-border-radius: 3px
+		background-color: #000
+		border-color: #FFF
+		border-radius: 3px
+
+.jcrop-dark
+	.jcrop-vline, .jcrop-hline
+		background: #000
+		filter: alpha(opacity = 70) !important
+		opacity: .7!important
+	.jcrop-handle
+		-moz-border-radius: 3px
+		-webkit-border-radius: 3px
+		background-color: #FFF
+		border-color: #000
+		border-radius: 3px
+
+.solid-line
+	.jcrop-vline, .jcrop-hline
+		background: #FFF
+
+.jcrop-holder img, img.jcrop-preview
+	max-width: none

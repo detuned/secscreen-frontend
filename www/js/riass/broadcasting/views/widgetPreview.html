@@ -1,0 +1,37 @@
+<div class="widget widget__preview" data-ng-controller="WidgetCtrl" data-ng-class="[
+	'widget__view-' + view,
+	widget.isPublished ? 'widget__published' : '',
+	widget.isPreloaded ? 'widget__preloaded' : '',
+	widget.isLoading ? 'widget__loading' : '',
+	widget.isError ? 'widget__error' : '',
+	widget.isHighlighted ? 'widget__highlighted' : '',
+	widget.isBusy ? 'widget__busy' : '',
+	widget.pubCount > 0 ? 'widget__used' : '',
+	isHover ? 'widget__hover' : '',
+	'widget-type__' + widget.type,
+	'widget__used-times-' + widget.pubCount,
+	isWidgetDeletable ? 'widget__deletable' : ''
+	]" data-ng-dblclick="editOriginal()">
+	<div class="widget_core">
+		<div class="widget_view"></div>
+		<span class="widget_spinner"></span>
+		<span class="widget_error"></span>
+		<span class="widget_busy"><span class="icon icon__busy"></span><span class="widget_editors"><span data-ng-repeat="editor in widget.editors" data-ng-bind="editor.user.name" class="widget_editor"></span></span></span>
+		<div class="widget_options">
+			<span class="widget_option widget_option__star" data-ng-hide=" ! widget.isStarred "><span class="icon icon__widget_star"></span></span><!--span class="widget_option widget_option__info" data-ng-hide=" ! widget.isInfo "><span class="icon icon__widget_info"></span></span-->
+		</div>
+		<span class="widget_attach" data-ng-bind="widget.attach.length" data-ng-show="widget.attach.length"></span>
+		<span class="widget_used" data-ng-bind="widget.pubCount"></span>
+		<span class="widget_id" data-ng-bind="widget.id"></span>
+	</div>
+	<div class="widget_actions" data-ng-show="isPublishingAllowed()">
+		<span class="widget_actions_buttons">
+			<span class="widget_actions_button widget_actions_button__single" data-ng-click="publish()" data-ng-dblclick="preventDblClick( $event )">Publish</span>
+		</span>
+	</div>
+	<div class="widget_edit-options">
+		<label class="widget_edit-option widget_edit-option__star" data-ng-dblclick="preventDblClick( $event )"><span class="widget_edit-option_icon-wrap"><span class="icon icon__widget_star"></span></span><input type="checkbox" class="widget_edit-option_field" data-ng-model="widget.isStarred" autocomplete="off" /></label><!--label class="widget_edit-option widget_edit-option__info"><span class="widget_edit-option_icon-wrap"><span class="icon icon__widget_info"></span></span><input type="checkbox" data-ng-model="widget.isInfo" class="widget_edit-option_field" autocomplete="off" /></label-->
+	</div>
+	<span class="widget_dragger"><span class="icon icon__widget_drag"></span></span>
+	<span class="widget_delete" data-ng-click="onWidgetDelete()"><span class="icon icon__close"></span></span>
+</div>

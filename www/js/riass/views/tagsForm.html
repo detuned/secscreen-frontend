@@ -1,0 +1,20 @@
+<div class="tags-form-core" data-ng-class="{ 'tags-form-core__ready' : formState.isReady, 'tags-form-core__up-side-down' : formState.isLocatedTooDown }">
+
+	<div class="tags-form_dropdowns">
+		<div class="tags-form_footer" data-ng-show="autocomplete.suggest.length || autocomplete.isLoading" data-ng-class="{'tags-form_footer__loading':autocomplete.isLoading}">
+			<ul class="tags-form_suggest">
+				<li data-ng-repeat="item in autocomplete.suggest" class="tags-form_suggest-item" data-ng-bind="item" data-ng-class="{ 'is-highlighted' : autocomplete.highlightedIndex == $index, 'is-new' : autocomplete.addTagIndex == $index }" data-ng-click="selectTag( $index )"></li>
+			</ul>
+		</div>
+		<div class="tags-form_header"></div>
+	</div>
+	<div class="tags-form_body">
+		<label class="tags-form_field-wrap">
+			<span class="tags-form_tags">
+				<span data-ng-repeat="tag in tags" class="tag" data-ng-class="{'tag__error': isTagHighlighted( tag ), 'tag__new' : isTagNew( tag ), 'tag__default' : isTagDefault( tag )}"><span class="tag_title" data-ng-bind="tag" title="{{tag}}"></span><span class="tag_delete" data-ng-click="removeTag(tag, $event)">×</span></span>
+				<input type="text" class="tags-form_field" autocomplete="off" data-ng-change="autocomplete.update()" data-ng-model="autocomplete.value"/>
+			</span>
+			<span class="tags-form_clear" title="Remove all tags" data-ng-hide="! tags.length && ! query" data-ng-click="removeAll()">×</span>
+		</label>
+	</div>
+</div>

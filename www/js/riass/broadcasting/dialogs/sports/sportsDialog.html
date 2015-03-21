@@ -1,0 +1,15 @@
+<div data-ng-controller="SportsDialogCtrl" class="sports-dialog" data-ng-class="{'sports-dialog__loading':isLoading,'sports-dialog__item-selected':selectedItem.id}">
+	<div class="sports-dialog_title-wrap">
+		<h2 class="sports-dialog_title"><span class="sports-dialog_title_base" data-ng-click="selectedItem.id && unselectItem()">Choose a sport</span><span class="sports-dialog_title_item" data-ng-show="selectedItem.id" data-ng-bind="selectedItem.title"></span></h2>
+		<span class="sports-dialog_reset-link" data-ng-click="reset()" data-ng-hide="selectedItem.id">Reset</span>
+	</div>
+	<div class="sports-dialog_body">
+		<ul class="sports-dialog_items" data-ng-show="!selectedItem.id">
+			<li class="sports-dialog_item" data-ng-repeat="item in items" data-ng-click="selectItem(item)" data-ng-class="{'is-selected':selectedItem.id == item.id}"><span class="sports-dialog_item-text" data-ng-bind="item.title"></span></li>
+		</ul>
+		<ul class="sports-dialog_items sports-dialog_items__sub" data-ng-show="selectedItem.id">
+			<li class="sports-dialog_item" data-ng-repeat="item in subItems" data-ng-click="selectSubItem(item)" data-ng-class="{'is-selected':selectedSubItem.ID_EVENT == item.ID_EVENT && selectedSubItem.ID_DISCIPLINE == item.ID_DISCIPLINE}" data-ng-show="item.ID_EVENT != 0"><span class="sports-dialog_item-text" data-ng-bind="item.EVENT_NAME + ' (' + item.ID_GENDER +  ')'"></span></li>
+		</ul>
+
+	</div>
+</div>

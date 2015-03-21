@@ -1,0 +1,10 @@
+<div class="notifier" data-ng-class="[
+	message() && message().isActivated && message().text ? 'notifier__activated' : '',
+	message().isClosable ? 'notifier__closable' : '',
+	'notifier__type-' + message().type
+	]">
+	<div class="notifier_body">
+		<span class="notifier_text" data-ng-bind="message().text"></span><span class="notifier_actions" data-ng-show="message().actions.length"><span class="notifier_action" data-ng-repeat="action in message().actions" data-ng-bind="action.text" data-ng-click="message().action()"></span></span>
+		<span class="notifier_close" data-ng-click="message().deactivate()"><span class="icon icon__close"></span></span>
+	</div>
+</div>

@@ -1,0 +1,20 @@
+[
+	{
+		"ID_GENDER" : "1",
+		"ID_EVENT" : "1",
+		"ID_DISCIPLINE" : "21",
+		"EVENT_NAME" : "Event 1"
+	},
+	{
+		"ID_GENDER" : "2",
+		"ID_EVENT" : "2",
+		"ID_DISCIPLINE" : "22",
+		"EVENT_NAME" : "Event 2"
+	},
+	{
+		"ID_GENDER" : "1",
+		"ID_EVENT" : "3",
+		"ID_DISCIPLINE" : "23",
+		"EVENT_NAME" : "Event 3"
+	}
+]

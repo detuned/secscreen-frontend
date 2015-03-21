@@ -1,0 +1,997 @@
+$widget_full_width: 400px
+$wiget_img_full_height: 225px //400 * 9 / 16
+// Common elements used in many widget types
+// -----------------------------------------------
+
+
+// Textual block
+.widget_textual
+	.widget &
+		position: absolute
+		top: 40%
+		right: 0
+		bottom: 0
+		left: 0
+		padding: 5px 7px
+		overflow: hidden
+		background: rgba(255,255,255,0.7)
+		font-size: 14px
+		line-height: 1
+		@include tsh_light
+	.widget__view-mini &
+		padding: 3px 5px
+		top: 40%
+		font-size: 12px
+	.widget-hover .widget__view-mini &
+		font-size: 16px
+
+// Title
+.widget_title
+	margin: 0 0 5px
+	font-size: 1.3em
+
+// Link to attached widget
+.widget_display__view .widget_attach_link
+	cursor: pointer
+	border-bottom: 1px solid #fcd1ca
+	color: #E14427
+	&:hover
+		border-color: #D5D5D5
+		color: #000
+
+//  Person
+.widget_person
+	.widget_display__view &
+		@include din
+		white-space: nowrap
+.widget_person__flagged,
+.widget_person__pictured
+	display: block
+	clear: left
+.widget_person_flag
+	display: none
+	vertical-align: middle
+	background: #EDEFF1
+	@include border-radius(50%)
+	.widget_person__flagged &
+		display: table-cell
+	.widget_person__flagged_big &
+		padding: 20px
+		min-width: 64px
+		height: 64px
+		.widget_img
+			position: relative
+			width: 64px
+			height: 64px
+			.button
+				overflow: hidden
+				text-indent: -1000px
+				opacity: 0
+				&:hover
+					opacity: 1
+	.widget_person__flagged_small &
+		padding: 15px
+		min-width: 32px
+		height: 32px
+		.widget_img
+			width: 32px
+			height: 32px
+	.widget_display__edit & .button
+		@include pos_full
+		text-align: center
+		@include border-radius(50%)
+
+.widget_person_picture
+	display: none
+	vertical-align: middle
+	@include border-radius(50%)
+	width: 100px
+	height: 100px
+	.widget_img
+		width: 100px
+		height: 100px
+		background-color: #EDEFF1
+		@include border-radius(50%)
+		background-position: center
+		background-repeat: no-repeat
+		.button
+			width: 100px
+			height: 100px
+			@include border-radius(50%)
+			padding: 25px 0 0
+			opacity: 0
+			text-align: center
+			@include box-sizing( border-box )
+			&:hover
+				opacity: 1
+		.widget_img_crop-button
+			display: none
+	.widget_person__pictured &
+		display: table-cell
+
+
+.widget_person_text
+	display: inline-block
+	white-space: normal
+	vertical-align: middle
+	line-height: 1
+	.widget_person__flagged &,
+	.widget_person__pictured &
+		display: table-cell
+		padding-left: 18px
+		width: 100%
+
+
+// Widget img field
+.widget_img
+	position: relative
+	.button
+		position: relative
+		z-index: 3
+.widget_img_cropped
+	display: none
+	@include pos_full
+	z-index: 1
+	overflow: hidden
+	line-height: 1.2
+	.widget_img__croppable &
+		display: block
+	&:before
+		display: block
+		position: absolute
+		top: 30%
+		left: 50%
+		width: 20px
+		height: 20px
+		margin: 0 0 -10px -10px
+		@include border-radius(50%)
+		content: ' '
+		background-color: #FFF
+		background-image: image_url('loader_1.gif')
+		background-repeat: no-repeat
+		background-position: center
+		visibility: hidden
+		opacity: 0
+		@include trns
+	.widget_img__loading &:before
+		visibility: visible
+		opacity: 1
+
+.widget_img_cropped_pic-wrapper
+	position: absolute
+	top: 0
+	right: 0
+	left: 0
+	z-index: 2
+	opacity: 1
+	@include trns(opacity)
+	.widget_img__loading &
+		opacity: 0
+.widget_img_cropped_dragger
+	display: none
+	position: absolute
+	top: 0
+	right: 0
+	bottom: 0
+	width: 34px
+	background: rgba(0,0,0,0.35) url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjFGNTNCNDM5NTI0RjExRTM4OUEyQUFBMEE3OTZFNEQ5IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjFGNTNCNDNBNTI0RjExRTM4OUEyQUFBMEE3OTZFNEQ5Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MUY1M0I0Mzc1MjRGMTFFMzg5QTJBQUEwQTc5NkU0RDkiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MUY1M0I0Mzg1MjRGMTFFMzg5QTJBQUEwQTc5NkU0RDkiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4fk2F8AAAAKUlEQVR42mL6//+/LwgzQAETiHj37h0bkOJgQAIcMAEWqMAPmAxAgAEAL1QKffiu+qMAAAAASUVORK5CYII=') 2px 2px
+	cursor: move
+	opacity: 0.8
+	.widget_img__draggable2crop &
+		display: block
+	.widget_img:hover &
+		opacity: 1
+.widget_img_cropped_dragger-arrows
+	display: none
+	position: absolute
+	top: 0
+	right: 36px
+	bottom: 0
+	z-index: 3
+	cursor: default
+	font-size: 22px
+	font-weight: bold
+	color: #3b3b3b
+	text-shadow: 0 0 3px #FFF
+	.widget_img__draggable2crop &
+		display: block
+	.widget_img__loading &
+		display: none
+	&:before
+		display: block
+		position: absolute
+		top: 10px
+		right: 0
+		content: '↑'
+	&:after
+		display: block
+		position: absolute
+		bottom: 10px
+		right: 0
+		content: '↓'
+
+.widget_img_cropped_pic-bounds
+	@include pos_full
+	z-index: 1
+.widget_img_cropped_pic-holder
+	display: block
+	width: 100%
+.widget_img_cropped_pic
+	display: block
+	max-width: 100%
+	margin: auto
+
+// Widget img crop button
+.widget_img_crop-button,
+.widget_img .widget_img_crop-button
+	position: absolute
+	bottom: 10px
+	left: 10px
+
+// Type default
+// -----------------------------------------------
+.widget-type__default
+	@include pt_r
+	.widget_title
+		@include pt_b
+	.widget_img
+		background-position: center
+		background-repeat: no-repeat
+		background-size: 100%
+		display: block
+
+	// Preview
+	&.widget
+		.widget_img
+			@include pos_full
+			background-position: 0 0
+			background-size: cover
+		.widget_title
+			margin: 0
+			font-size: 1.2em
+			white-space: nowrap
+			overflow: hidden
+			text-overflow: ellipsis
+			&+.widget_text
+				opacity: 0.6
+		.widget_text
+			line-height: 0.9
+		&.widget__view-mini .widget_title
+			margin-bottom: 1px
+
+	// View
+	& .widget_display__view
+		.widget_title
+			font-size: 28px
+		.widget_img
+			height: $wiget_img_full_height
+		.widget_text
+			padding-top: 20px
+			padding-bottom: 28px
+			font-size: 18px
+			line-height: 20px
+
+	// Edit
+	& .widget_display__edit
+		.widget_title.wfield
+			font-size: 28px
+		.widget_img
+			height: $wiget_img_full_height
+			text-align: center
+			line-height: $wiget_img_full_height
+			background-color: #F6F6F6
+			.button
+				opacity: 0.8
+
+
+// Type goal
+// -----------------------------------------------
+.widget-type__goal
+
+	// Common
+	.widget_title
+		@include pt_b
+		text-align: center
+	.widget_nums
+		@include din
+		text-align: center
+		line-height: 1
+		white-space: nowrap
+	.widget_time-wrap
+		text-align: center
+	.widget_text,
+	.widget_time
+		text-align: center
+	.widget_num-sprt
+		position: relative
+		top: -0.1em
+
+	// Preview
+	&.widget
+		.widget_core
+			background: #FFF69E
+		.widget_title
+			line-height: 0.9
+		.widget_nums
+			padding: 0 3px
+			@include tsh_light
+			font-size: 40px
+			vertical-align: middle
+			@include opacity(0.5)
+		.widget_person_text,
+		.widget_text,
+		.widget_time
+			display: block
+			white-space: nowrap
+			overflow: hidden
+			text-overflow: ellipsis
+			text-align: center
+		&.widget__view-mini
+			.widget_title
+				margin-bottom: 3px
+
+		// Preview hover
+		.widget-hover &
+			.widget_nums
+				font-size: 46px
+			.widget_title
+				font-size: 1.5em
+	// Full view
+	& .widget_display__view
+		.widget_preview
+			padding: 0 0 20px
+		.widget_title
+			font-size: 56px
+		.widget_nums
+			font-size: 144px
+			line-height: 0.9
+			color: #8D9DA6
+		.widget_text,
+		.widget_time
+			@include din
+			margin: 0 0 20px
+			color: #FF4D2C
+			font-size: 30px
+		.widget_person
+			padding-bottom: 20px
+		.widget_person_text
+			font-size: 36px
+
+	// Edit
+	& .widget_display__edit
+		padding-bottom: 20px
+		.widget_nums
+			font-size: 100px
+			color: #8D9DA6
+		.wfield.widget_num
+			width: 0.85em
+			color: #8D9DA6
+			&.widget_num__1
+				text-align: right
+		.wfield.widget_title
+			padding-top: 0
+			padding-bottom: 0
+			font-size: 46px
+			text-align: center
+		.wfield.widget_text,
+		.wfield.widget_time
+			margin: 0 auto
+			width: 4em
+			text-align: center
+			@include din
+			font-size: 30px
+			color: #FF4D2C
+		.widget_person_text .wfield
+			font-size: 20px
+			@include din
+
+
+
+// Type person
+// -----------------------------------------------
+.widget-type__person
+
+	// Common
+	.widget_img
+		background-position: center
+		background-repeat: no-repeat
+		background-size: 100%
+		display: block
+	.widget_name
+		@include din
+	.widget_medals
+		margin: 0 0 20px
+		padding: 10px 0
+		border: 4px solid #EDEFF1
+		text-align: center
+	.widget_medal
+		display: inline-block
+		margin: 0 16px
+	.widget_medal-num
+		@include pt_b
+		font-size: 30px
+		margin: 0 0 0 8px
+		vertical-align: middle
+		white-space: nowrap
+		line-height: 1
+	.widget_text
+		@include pt_r
+
+	// Preview
+	&.widget
+		.widget_img
+			@include pos_full
+			background-position: 0 0
+			background-size: cover
+		.widget_name
+			font-size: 16px
+		&.widget__view-mini
+			.widget_name
+				font-size: 14px
+
+
+	// Full view
+	& .widget_display__view
+		.widget_img
+			height: $wiget_img_full_height
+		.widget_preview
+			padding: 20px 0
+		.widget_text
+			font-size: 18px
+			line-height: 21px
+		.widget_name
+			padding: 12px 0
+			text-align: center
+			font-size: 36px
+			line-height: 1.2
+
+	// Edit
+	& .widget_display__edit
+		padding-bottom: 20px
+		.widget_img
+			height: $wiget_img_full_height
+			text-align: center
+			line-height: $wiget_img_full_height
+			background-color: #F6F6F6
+			.button
+				opacity: 0.8
+		.widget_name .wfield
+			text-align: center
+			font-size: 36px
+			height: 92px
+			@include din
+		.widget_medal
+			margin: 0 8px
+		.widget_medal-num.wfield
+			width: 1.5em
+		.widget_text.wfield
+			font-size: 18px
+			line-height: 21px
+			
+// Type Game moment
+// -----------------------------------------------
+.widget-type__game_moment
+	@include pt_r
+	.widget_title
+		@include pt_b
+	.widget_img
+		background-position: center
+		background-repeat: no-repeat
+		display: block
+	&.widget
+		.widget_img
+			@include pos_full
+			background-position: 0 0
+			background-size: cover
+		.widget_title
+			margin: 0
+			font-size: 1.2em
+			white-space: nowrap
+			overflow: hidden
+			text-overflow: ellipsis
+			&+.widget_text
+				opacity: 0.6
+		.widget_text
+			line-height: 0.9
+		&.widget__view-mini .widget_title
+			margin-bottom: 1px
+	& .widget_display__view
+		.widget_title
+			font-size: 28px
+			text-align: center
+		.widget_img
+			height: 100px
+		.widget_text
+			padding-top: 20px
+			padding-bottom: 28px
+			font-size: 18px
+			line-height: 21px
+	& .widget_person
+		margin-top: 10px
+		.widget_img
+			height: 100px
+		.widget_person_text
+			font-size: 36px
+	& .widget_preview
+		.widget_person
+			margin-top: 0
+		.widget_person_text
+			font-size: 14px
+
+	// Edit
+	& .widget_display__edit
+		.widget_title.wfield
+			font-size: 28px
+		.icon_img .widget_img
+			cursor: pointer
+			height: 100px
+			text-align: center
+			line-height: 100px
+			background-color: #F6F6F6
+		.widget_person_text .wfield
+			font-size: 20px
+			@include din
+		.widget_text.wfield
+			font-size: 18px
+			line-height: 21px
+		.icon_img .button
+			opacity: 0.8
+
+// Type finish
+// -----------------------------------------------
+.widget-type__finish
+	// Full
+	.widget-full
+		.widget_title
+			font-weight: bold
+			margin: 0
+			margin-top: 20px
+			font-size: 1.2em
+			white-space: nowrap
+			overflow: hidden
+			text-overflow: ellipsis
+		.widget_text
+			margin-bottom: 20px
+			
+	// Preview
+	.widget_preview 
+		.widget_title
+			font-weight: bold
+			font-size: 14px
+			margin: 0
+		.widget_text
+			font-size: 11px
+
+
+// Type question
+// -----------------------------------------------
+.widget-type__question
+	// Full
+	.widget-full
+		.widget_title
+			font-weight: bold
+			margin: 0
+			margin-top: 20px
+			font-size: 1.2em
+			white-space: nowrap
+			overflow: hidden
+			text-overflow: ellipsis
+			
+	// Preview
+	.widget_preview 
+		.widget_title
+			font-weight: bold
+			font-size: 14px
+			margin: 0
+		.widget_text
+			font-size: 11px
+
+	// Fake textarea and button
+	.widget_fake_textarea
+		height: 80px
+		border: 1px solid #CCCCCC
+		margin: 20px
+		margin-top: 10px
+	
+	.widget_fake_submit
+		float: right
+		width: 100px
+		text-align: center
+		padding: 8px
+		margin-right: 20px
+		margin-bottom: 20px
+		color: #FFFFFF
+		background: #0090D9
+		font-size: 18px
+		
+// Type fact
+// -----------------------------------------------
+.widget-type__fact
+
+	@include pt_r
+	.widget_title
+		@include pt_b
+	.widget_img
+		background-position: center
+		background-repeat: no-repeat
+		display: block
+	&.widget
+		.widget_img
+			@include pos_full
+			background-position: 0 0
+			background-size: cover
+		.widget_title
+			margin: 0
+			font-size: 1.2em
+			white-space: nowrap
+			overflow: hidden
+			text-overflow: ellipsis
+			&+.widget_text
+				opacity: 0.6
+		.widget_text
+			line-height: 0.9
+		&.widget__view-mini .widget_title
+			margin-bottom: 1px
+	& .widget_display__view
+		.widget_title
+			font-size: 28px
+			padding-top: 10px
+		.widget_img
+			height: $wiget_img_full_height
+		.widget_text
+			padding-top: 20px
+			padding-bottom: 12px
+			font-size: 14px
+			line-height: 16px
+		.icon_image
+			height: 120px
+			margin-bottom: 20px
+		.fact_text
+			margin: 0
+			margin-bottom: 12px
+			padding: 0 25px
+			.widget_text
+				margin: 0
+				padding: 0
+			.column1
+				font-weight: bold
+
+
+
+	// Edit
+	& .widget_display__edit
+		.widget_title.wfield
+			font-size: 28px
+		.widget_img
+			height: $wiget_img_full_height
+			text-align: center
+			line-height: $wiget_img_full_height
+			background-color: #F6F6F6
+			.button
+				opacity: 0.8
+		.icon_img .widget_img
+			cursor: pointer
+			height: 120px
+			text-align: center
+			line-height: 120px
+			background-color: #F6F6F6
+		.widget_person_text .wfield
+			font-size: 20px
+			@include din
+		.widget_text.wfield
+			font-size: 18px
+			line-height: 21px
+		.icon_img .button
+			opacity: 0.8
+		.facts
+			.wfield__textarea
+				height: 45px
+				
+				
+// Type about
+// -----------------------------------------------
+.widget-type__about
+
+	@include pt_r
+	.widget_title
+		@include pt_b
+	.widget_img
+		background-position: center
+		background-repeat: no-repeat
+		display: block
+	&.widget
+		.widget_img
+			@include pos_full
+			background-position: 0 0
+			background-size: cover
+		.widget_title
+			margin: 0
+			font-size: 1.2em
+			white-space: nowrap
+			overflow: hidden
+			text-overflow: ellipsis
+			&+.widget_text
+				opacity: 0.6
+		.widget_text
+			line-height: 0.9
+		&.widget__view-mini .widget_title
+			margin-bottom: 1px
+	& .widget_display__view
+		.widget_title
+			font-size: 28px
+			padding-top: 10px
+		.widget_img
+			height: $wiget_img_full_height
+		.widget_text
+			padding-top: 20px
+			padding-bottom: 12px
+			font-size: 14px
+			line-height: 16px
+		.icon_image
+			height: 120px
+			margin-top: 20px
+		.fact_text
+			margin: 0
+			margin-bottom: 12px
+			padding: 0 25px
+			.widget_text
+				margin: 0
+				padding: 0
+			.column1
+				display: table-cell
+				color: #999999
+				width: 170px
+			.column2
+				display: table-cell
+				font-weight: bold
+
+
+
+	// Edit
+	& .widget_display__edit
+		.widget_title.wfield
+			font-size: 28px
+		.widget_img
+			height: $wiget_img_full_height
+			text-align: center
+			line-height: $wiget_img_full_height
+			background-color: #F6F6F6
+			.button
+				opacity: 0.8
+		.icon_img .widget_img
+			cursor: pointer
+			height: 120px
+			text-align: center
+			line-height: 120px
+			background-color: #F6F6F6
+		.widget_person_text .wfield
+			font-size: 20px
+			@include din
+		.widget_text.wfield
+			font-size: 18px
+			line-height: 21px
+		.icon_img .button
+			opacity: 0.8
+		.facts
+			.wfield__textarea
+				height: 45px
+				
+// Type poll
+// -----------------------------------------------
+.widget-type__poll
+
+	@include pt_r
+	.widget_title
+		@include pt_b
+	&.widget
+		.widget_title
+			margin: 0
+			font-size: 1.2em
+			white-space: nowrap
+			overflow: hidden
+			text-overflow: ellipsis
+			&+.widget_text
+				opacity: 0.6
+		.widget_text
+			line-height: 0.9
+		&.widget__view-mini .widget_title
+			margin-bottom: 1px
+	& .widget_display__view
+		margin-bottom: 20px
+		.widget_title
+			font-size: 28px
+			padding-top: 10px
+		.widget_text
+			padding-bottom: 12px
+			font-size: 14px
+			line-height: 16px
+		.fact_text
+			margin: 0
+			margin-bottom: 12px
+			padding: 0 25px
+			.widget_text
+				display: table-cell
+				margin: 0
+				padding: 0
+				padding-left: 10px
+		.chart
+			background: #ff4d2c
+			height: 20px
+			margin-left: 90px
+		.votes
+			float: left
+			width: 80px
+			color: #ff4d2c
+			font-size: 20px
+			text-align: right
+		.chart_area
+			width: 250px
+			margin-top: 10px
+			margin-bottom: 20px
+			
+	& .fake_radio
+		display: table-cell
+		border-radius: 50%
+		border: 5px solid #EEEEEE
+		width: 25px
+		height: 25px
+		DIV
+			border-radius: 50%
+			border: 3px solid #FF0000
+			background: #FF0000
+			width: 10px
+			height: 10px
+			margin-left: 5px
+			margin-top: 5px
+
+
+
+	// Edit
+	& .widget_display__edit
+		.widget_title.wfield
+			font-size: 28px
+		.widget_person_text .wfield
+			font-size: 20px
+			@include din
+		.widget_text.wfield
+			font-size: 18px
+			line-height: 21px
+		.facts
+			.wfield__textarea
+				height: 45px
+				
+				
+// Type shooting
+// -----------------------------------------------
+.widget-type__shooting
+
+	@include pt_r
+	.widget_title
+		@include pt_b
+	&.widget
+		.widget_title
+			margin: 0
+			font-size: 1.2em
+			white-space: nowrap
+			overflow: hidden
+			text-overflow: ellipsis
+			&+.widget_text
+				opacity: 0.6
+		.widget_text
+			line-height: 0.9
+		&.widget__view-mini .widget_title
+			margin-bottom: 1px
+	& .widget_display__view
+		margin-bottom: 20px
+		.widget_title
+			font-size: 28px
+			padding-top: 10px
+		.results
+			text-align: right
+			margin: -35px 0 60px 120px
+			.fake_radio
+				margin-right: 10px !important
+			
+	& .fake_radio
+		display: block
+		border-radius: 50%
+		border: 5px solid #EEEEEE
+		width: 25px
+		height: 25px
+		margin-right: 15px
+		cursor: pointer
+		float: left
+		DIV
+			border-radius: 50%
+			border: 3px solid #000000
+			background: #000000
+			width: 15px
+			height: 15px
+			margin-left: 2px
+			margin-top: 2px
+
+
+
+	// Edit
+	& .widget_display__edit
+		.widget_title.wfield
+			font-size: 28px
+		.widget_person_text .wfield
+			font-size: 20px
+			@include din
+		.results
+			text-align: right
+			margin: -35px 0 60px 125px
+		.widget_persons
+			margin-bottom: 80px
+			
+// Type answer
+// -----------------------------------------------
+.widget-type__answer
+	@include pt_r
+	.widget_img
+		background-position: center
+		background-repeat: no-repeat
+		background-size: 100%
+		display: block
+	.widget_title
+		@include pt_b
+
+	// Preview
+	.widget_preview
+		.widget_img
+			@include pos_full
+			background-position: 0 0
+			background-size: cover
+		.widget_title
+			font-weight: bold
+			font-size: 14px
+			margin: 0
+		.widget_text
+			font-size: 11px
+			
+
+	// View
+	& .widget_display__view
+		.widget_title
+			font-size: 28px
+			white-space: nowrap
+			overflow: hidden
+			text-overflow: ellipsis
+		.widget_img
+			height: $wiget_img_full_height
+		.widget_text_main
+			padding-top: 20px
+			padding-bottom: 12px
+			font-size: 16px
+			line-height: 20px
+		.fact_text
+			margin: 0
+			margin-bottom: 12px
+			padding: 0 25px
+			.widget_text
+				margin: 0
+				padding: 0
+			.column1
+				font-weight: bold			
+
+	// Edit
+	& .widget_display__edit
+		.widget_title.wfield
+			font-size: 28px
+		.widget_person_text .wfield
+			font-size: 20px
+			@include din
+		.widget_text.wfield
+			font-size: 18px
+			line-height: 21px
+		.facts
+			.wfield__textarea
+				height: 45px
+		.widget_img
+			height: $wiget_img_full_height
+			text-align: center
+			line-height: $wiget_img_full_height
+			background-color: #F6F6F6
+			.button
+				opacity: 0.8

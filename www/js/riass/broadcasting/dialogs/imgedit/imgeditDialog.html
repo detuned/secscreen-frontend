@@ -1,0 +1,12 @@
+<div data-ng-controller="ImgeditDialogCtrl" class="imgedit-dialog"  data-ng-class="{ 'imgedit-dialog__loading' : isLoading }">
+	<div class="imgedit-dialog_top">
+		<div class="imgedit-dialog_header">
+			<span class="button button__gray button__compact" data-ng-click="submit()">Crop image</span>
+			<span class="button button__text button__compact" data-ng-click="cancel()">Don't crop</span>
+			<div class="imgedit-dialog_error" data-ng-show="errorMsg" data-ng-bind="errorMsg"></div>
+		</div>
+	</div>
+	<div class="imgedit-dialog_body" data-jcrop="img">
+		<!-- Img goes here -->
+	</div>
+</div>

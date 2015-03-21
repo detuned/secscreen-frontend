@@ -1,0 +1,18 @@
+<div data-ng-controller="WidgetShootingCtrlEdit">
+	<div class="widget_area">
+		<widget-fieldset>
+			<input type="text" class="wfield wfield__text widget_title" data-ng-model="edit.widget.fields.title" data-ng-change="edit.autoSave()" data-widget-field-autofocus />
+		</widget-fieldset>
+		<div class="widget_persons">
+			<div data-ng-repeat="n in [0,1,2]">
+				<widget-fieldset class="widget_person widget_person__pictured">
+					<div class="widget_person_picture"><widget-img-field data-img="edit.widget.fields.person[n].img" data-change="edit.autoSave" data-size="{{CONST.IMG_SIZE_SMALL}}" data-sources="[CONST.IMG_EXPORT_TYPE_INTERNAL]" data-default-internal-tags="[CONST.IMG_TAG_FLAG]"></widget-img-field></div>
+					<div class="widget_person_text"><input type="text" class="wfield wfield__text" data-ng-model="edit.widget.fields.person[n].text" data-ng-change="edit.autoSave()" data-widget-field-autofocus /></div>
+				</widget-fieldset>
+				<widget-fieldset class="results">
+					<div class="fake_radio" data-ng-repeat="i in [0,1,2,3,4]" data-ng-click="edit.toggleResult( n, i )" data-ng-model="edit.widget.fields.person[n].result[i]"><div data-ng-show="!! edit.widget.fields.person[n].result[i]"></div><span>&nbsp;</span></div>
+				</widget-fieldset>
+			</div>
+		</div>
+	</div>
+</div>

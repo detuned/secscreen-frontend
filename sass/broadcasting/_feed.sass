@@ -1,0 +1,57 @@
+.feed
+	padding: 0 0 0 4px
+	height: 100%
+	&:before
+		display: block
+		position: absolute
+		top: -21px
+		left: 5px
+		width: 20px
+		height: 20px
+		background: image-url('loader_1.gif')
+		content: ' '
+		opacity: 0
+		visibility: hidden
+		@include transition(opacity 0.5s ease-in-out)
+
+.feed__loading,
+.feed__bootstraping
+	&:before
+		opacity: 0.2
+		visibility: visible
+.feed_feed
+	overflow-x: hidden
+	overflow-y: hidden
+	white-space: nowrap
+	height: 100%
+	.panel__feed:hover &,
+	.is-image-preview-hovered__zone-feed &
+		overflow-x: auto
+
+
+.feed_feed-core
+	position: relative
+	display: inline-block
+	height: 100%
+	@include transition(height 0.2s ease-in-out,padding 0.2s ease-in-out)
+	.feed__bootstraping &
+		visibility: hidden
+
+.feed_item
+	display: inline-block
+	vertical-align: top
+
+.feed_message
+	display: none
+	@include pos_full
+	text-align: center
+	font-size: 1.5em
+	padding: 45px 0 0
+	color: #a8a8a8
+	@include tsh_light
+
+.feed__empty .feed_message__empty,
+.feed__not-available .feed_message__not-available
+	display: block
+.feed__not-available .feed_message__empty
+	display: none

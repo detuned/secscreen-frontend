@@ -1,0 +1,27 @@
+<div data-ng-controller="StorageCtrl" class="storage"
+		data-ng-class="{'storage__no_closed' : ! closedFolders.length, 'storage__has_fulscreen_folder' : hasFullscreenFolder }">
+	<panel-ext-header>
+		<panel-buttons data-family="storage">
+			<panel-button data-ng-repeat="button in controlButtons" data-type="{{button.type}}" data-view="text" data-family="storage" data-text="{{button.text}}" data-is-accent="button.accent" data-is-active="button.active" data-is-clickable-active="button.clickableActive" data-ng-click="controlButtonAction(button)" data-opaque></panel-button>
+		</panel-buttons>
+	</panel-ext-header>
+	<div class="storage_core" data-scroll-top="{{isClosedOpen + '_' + hasFullscreenFolder}}"
+			data-reposition-trigger="scroll">
+		<div class="storage_closed" data-ng-class="{'storage_closed__active':isClosedOpen && closedFolders.length }">
+			<h2 class="storage_closed_title">Click to restore the folder</h2>
+			<div class="storage_closed_list-wrap">
+				<ul class="storage_closed_list"><li data-ng-repeat="folderData in closedFolders" data-ng-click="restoreClosedFolder( folderData )" class="storage_closed_item"><span class="storage_closed_item_title" data-ng-bind="folderData.title" title="{{folderData.title}}"></span></li></ul>
+			</div>
+		</div>
+		<div class="storage_set storage_set__user" data-sortable-list="{ onSort:'saveUserFoldersOrder', axis : 'y' }" data-ng-hide="! userFolders.length" data-ng-class="{'storage_set__single': userFolders.length == 1 }">
+			<div data-ng-repeat="folderData in userFolders" class="storage_folder-wrapper">
+				<folder data-id="folderData.id"></folder>
+			</div>
+		</div>
+		<div class="storage_set storage_set__system">
+			<div data-ng-repeat="folderData in systemFolders" class="storage_folder-wrapper">
+				<folder data-id="folderData.id"></folder>
+			</div>
+		</div>
+	</div>
+</div>

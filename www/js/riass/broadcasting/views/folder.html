@@ -1,0 +1,19 @@
+<div class="folder" data-ng-controller="FolderCtrl" data-ng-class="[
+	'folder__type-' + folder.type,
+	folder.state.open ? 'folder__opened' : '',
+	folder.state.loading ? 'folder__loading' : '',
+	folder.state.fullscreenable ? 'folder__fullscreenable' : '',
+	folder.state.fullscreen ? 'folder__fullscreen' : '',
+	folder.type == 'user' ? 'folder__settype-user' : 'folder__settype-system',
+	folder.type == 'user' ? 'folder__color-id-' + folder.colorId : ''
+	]">
+	<div class="folder_header" data-ng-click="toggle()">
+		<span class="folder_title" data-ng-bind="folder.title"></span>
+		<span class="folder_stat" data-ng-bind="folder.stat"></span>
+		<div class="folder_buttons">
+			<span class="folder_button folder_button__fullscreen" data-ng-class="{ 'is-active': folder.state.fullscreen }"  data-ng-show="folder.state.fullscreenable" title="Maximize" data-ng-click="toggleFullscreen( $event )"><span class="icon icon__folder-fullscreen"></span></span><span class="folder_button folder_button__close"  data-ng-show="folder.state.closable" title="Delete folder (reversibly)" data-ng-click="remove( $event )"><span class="icon icon__folder-close"></span></span>
+		</div>
+	</div>
+	<div class="folder_body"></div>
+	<span class="folder_dragger sortable-handler" data-ng-show="folder.state.draggable && ! folder.state.fullscreen"><span class="icon icon__folder-drag"></span></span>
+</div>

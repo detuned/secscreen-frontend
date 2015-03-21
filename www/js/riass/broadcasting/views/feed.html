@@ -1,0 +1,15 @@
+<div data-ng-controller="FeedCtrl" class="feed" data-ng-class="{
+	'feed__loading' : state.loading,
+	'feed__not-available' : ! isDataAvailable(),
+	'feed__empty' : ! state.loading && ! items.length
+	}">
+	<div class="feed_feed" data-live-list="76" data-on-not-complete="loadMore()">
+		<div class="feed_feed-core">
+			<div data-ng-repeat="image in items" class="feed_item">
+				<image-preview data-image="image" data-zone="feed" data-simple-hover></image-preview>
+			</div>
+		</div>
+		<div class="feed_message feed_message__not-available">Photos will be coming when broadcast begin</div>
+		<div class="feed_message feed_message__empty">Photos not yet been received</div>
+	</div>
+</div>

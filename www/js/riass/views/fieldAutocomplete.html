@@ -1,0 +1,5 @@
+<div class="field-autocomplete" data-ng-class="{ 'field-autocomplete__up-side-down' : acState.isLocatedTooDown }">
+	<ul class="field-autocomplete_suggest">
+		<li data-ng-repeat="item in autocomplete.suggest" class="field-autocomplete_suggest-item" data-ng-bind="item.result" data-ng-class="{ 'is-highlighted' : autocomplete.highlightedIndex == $index }" data-ng-click="selectItem( $index )"></li>
+	</ul>
+</div>

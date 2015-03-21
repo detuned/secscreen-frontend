@@ -1,0 +1,6 @@
+<div class="widget_preview" data-ng-controller="WidgetFinishCtrl">
+	<div class="widget_textual">
+		<div class="widget_title" data-ng-bind="widget.fields.title"></div>
+		<div class="widget_text" data-ng-bind-html-unsafe="widget.fields.text|parseTextField:widget.attach"></div>
+	</div>
+</div>

@@ -1,0 +1,11 @@
+<div class="widget_preview" data-ng-controller="WidgetShootingCtrl" data-ng-class="{ 'widget_preview__split-images': widget.fields.person[0].img && widget.fields.person[1].img }">
+	<widget-img img="widget.fields.person[0].img" size="{{CONST.IMG_SIZE_SMALL}}"></widget-img>
+	<widget-img img="widget.fields.person[1].img" size="{{CONST.IMG_SIZE_SMALL}}"></widget-img>
+	<div class="widget_textual">
+		<div class="widget_persons">
+			<div data-ng-repeat="person in widget.fields.person" class="widget_person">
+				<div class="widget_person_text" data-ng-bind-html-unsafe="person.text|parseTextField:widget.attach"></div>
+			</div>
+		</div>
+	</div>
+</div>

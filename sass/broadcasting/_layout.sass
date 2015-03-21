@@ -1,0 +1,267 @@
+// variables
+$header_height: 40px
+$panel_header_height: 23px
+
+//imports
+@import "header"
+
+//styles
+BODY,HTML
+	height: 100%
+BODY
+	@include ptn_r
+	position: relative
+	font-size: 1em
+	line-height: 1.5
+	min-width: 1080px
+	overflow: hidden
+	@include noselect
+	&:after
+		@include pos_full
+		@include trns
+		background: rgba(255,255,255,0.95) image-url('loader_1.gif') no-repeat center 100px
+		content: ' '
+		z-index: 1002
+		opacity: 0
+		visibility: hidden
+	&.is-loading
+		&:after
+			opacity: 1
+			visibility: visible
+
+.layout
+	position: absolute
+	z-index: 1
+	top: $header_height
+	right: 0
+	bottom: 0
+	left: 0
+	overflow: hidden
+
+.panel
+	position: absolute
+	@include pos_full
+	//background: #F1F1F1
+	background: #FFF
+	@include box-shadow(inset 0 0 3px rgba(0,0,0,0.2))
+	@include transition( width 0.2s ease-in-out, height 0.2s ease-in-out, top 0.2s ease-in-out, left 0.2s ease-in-out )
+	overflow: hidden
+	&:before,
+	&:after
+		display: block
+		position: absolute
+		background: #A3A3A3
+		content: ' '
+	&:before
+		top: 0
+		left: 0
+		bottom: 0
+		width: 2px
+	&:after
+		right: 0
+		bottom: 0
+		left: 0
+		height: 2px
+	&:last-child:after
+		display: none
+	&.is-fullscreen
+		z-index: 11 !important
+		top: 0 !important
+		bottom: 0 !important
+		left: 0 !important
+		width: 100% !important
+		height: auto !important
+
+.panel_header
+	position: absolute
+	top: 0
+	right: 0
+	left: 0
+	height: $panel_header_height
+	@extend %clr
+	background: rgba(0, 0, 0, 0.03)
+	text-align: right
+
+.panel_buttons
+	display: inline-block
+	vertical-align: top
+	position: relative
+	white-space: nowrap
+	opacity: 0.4
+	@include trns
+	&:before,
+	&:after
+		display: block
+		position: absolute
+		top: 0
+		height: $panel_header_height
+		left: 0
+		width: 1px
+		border-left: 1px solid #AEAEAE
+		@include background-image(linear-gradient(top, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%))
+		content: ' '
+	&:after
+		left: 100%
+		display: none
+	.panel:hover &,
+	.is-widget-preview-hovered__zone-timeline .panel__timeline &,
+	.is-widget-preview-hovered__zone-folder .panel__storage &
+		opacity: 1
+	&.panel_buttons__separate_both:after
+		display: block
+	//&:hover,
+	//.panel:hover &:hover
+	//	opacity: 1
+
+
+.panel_button
+	position: relative
+	display: inline-block
+	vertical-align: top
+	width: 30px
+	height: $panel_header_height
+	line-height: $panel_header_height - 1
+	cursor: pointer
+	opacity: 0.5
+	&:before,
+	&:after
+		display: block
+		position: absolute
+		top: 0
+		height: $panel_header_height
+		left: 0
+		width: 1px
+		border-left: 1px solid #AEAEAE
+		@include background-image(linear-gradient(top, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%))
+		content: ' '
+	&:first-child:before,
+	&:first-child:after,
+	&.is-active:before,
+	&.is-active:after,
+	&:active:before,
+	&:active:after
+		display: none
+	@include trns(opacity)
+	@include noselect
+	&:hover
+		opacity: 1
+	&.is-active,
+	&:active
+		background: #9A9A9A
+		@include box-shadow( inset 2px 2px 1px rgba(0,0,0,0.6) )
+	&.is-active
+		cursor: default
+		&:hover
+			opacity: 0.5
+		&.is-clickable-active
+			cursor: pointer
+	&.panel_button__wide
+		width: 34px
+	&.panel_button__text
+		width: auto
+		@include tsh_light
+		color: #464646
+		.panel_button_icon
+			margin-left: 6px
+	&.panel_button__opaque
+		background: #CBCBCB
+		&.panel_button__accent
+			background: #DED394
+		&:active,
+		&.is-active
+			background: #9A9A9A
+			.panel_button_text
+				text-shadow: 0 1px rgba(0,0,0,0.3)
+				color: #FFF
+.panel_button__max
+	&.is-active
+		cursor: pointer
+.panel_button_text
+	margin: 0 10px 0 4px
+.panel_button_icon
+	vertical-align: top
+	height: $panel_header_height
+	line-height: $panel_header_height
+
+.icon__layout-min
+	@include sized-sprite($icons, layout_min)
+	.panel_button.is-active &,
+	.panel_button:active &
+		@include sized-sprite($icons, layout_min_active)
+	.panel__type_ver &
+		@include sized-sprite($icons, layout_vmin)
+	.panel__type_ver .panel_button.is-active &,
+	.panel__type_ver .panel_button:active &
+		@include sized-sprite($icons, layout_vmin_active)
+
+.icon__layout-max
+	@include sized-sprite($icons, layout_max)
+	.panel_button.is-active &,
+	.panel_button:active &
+		@include sized-sprite($icons, layout_max_active)
+	.panel__type_ver &
+		@include sized-sprite($icons, layout_vmax)
+	.panel__type_ver .panel_button.is-active &,
+	.panel__type_ver .panel_button:active &
+		@include sized-sprite($icons, layout_vmax_active)
+
+.icon__layout-fullscreen
+	@include sized-sprite($icons, layout_fullscreen)
+	.panel_button.is-active &,
+	.panel_button:active &
+		@include sized-sprite($icons, layout_fullscreen_active)
+
+
+.panel__fullscreen-disallow .panel_button__fullscreen,
+.panel__state_min.panel__type_ver .panel_button__fullscreen,
+.panel__state_min.panel__type_ver .panel_button__min
+	display: none !important
+
+.panel.is-fullscreen .panel_buttons__layout
+	.panel_button
+		display: none
+	.panel_button__fullscreen
+		display: inline-block
+
+.panel_body
+	position: absolute
+	top: $panel_header_height
+	right: 0
+	bottom: 0
+	left: 0
+
+// Vertical minified panels
+.panel__type_ver
+	.panel_body
+		@include transition( opacity 0.2s ease-in )
+
+.panel__type_ver.panel__state_min:not(.is-fullscreen)
+	.panel_body
+		opacity: 0
+		visibility: hidden
+	.panel_buttons:not(.panel_buttons__layout)
+		display: none
+	.panel_buttons__layout .panel_button
+		display: block
+
+// ExtHeader is special container for placing smth to header from body
+.panel_ext-header
+	position: absolute
+	top: -$panel_header_height
+	left: 2px
+	white-space: nowrap
+	line-height: $panel_header_height
+	.panel__state_min &
+		display: none
+
+// Droppable
+.is-droppable
+	&:after
+		display: block
+		@include pos_full
+		background: #000
+		@include trns(opacity)
+		opacity: 0.05
+		content: ' '
+	&.is-droppable-hover:after
+		opacity: 0.2

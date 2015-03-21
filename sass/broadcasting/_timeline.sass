@@ -1,0 +1,206 @@
+.panel__timeline
+	//@include box-shadow( inset 0 0 65px rgba(0,0,0,0.20) )
+	.panel_ext-header
+		left: auto
+		right: 75px
+	.panel_body
+		bottom: 6px
+
+
+
+.icon__timeline-center
+	@include sized-sprite($icons, timeline_center)
+	.panel_button.is-active &,
+	.panel_button:active &
+		@include sized-sprite($icons, timeline_center_active)
+
+.icon__timeline-zoom-in
+	@include sized-sprite($icons, timeline_zoom_in)
+	.panel_button.is-active &,
+	.panel_button:active &
+		@include sized-sprite($icons, timeline_zoom_in_active)
+
+.icon__timeline-zoom-out
+	@include sized-sprite($icons, timeline_zoom_out)
+	.panel_button.is-active &,
+	.panel_button:active &
+		@include sized-sprite($icons, timeline_zoom_out_active)
+
+.timeline
+	padding: 0 0 0 4px
+	height: 100%
+	@include noselect
+	&:before
+		display: block
+		position: absolute
+		top: -21px
+		left: 5px
+		width: 20px
+		height: 20px
+		background: image-url('loader_1.gif')
+		content: ' '
+		opacity: 0
+		visibility: hidden
+		@include transition(opacity 0.5s ease-in-out)
+
+.timeline__loading,
+.timeline__bootstraping
+	.panel_buttons__timeline
+		display: none
+	&:before
+		opacity: 0.2
+		visibility: visible
+
+.timeline__empty
+	.panel_ext-header
+		display: none
+	.timeline_line
+		opacity: 0.2
+	
+.timeline__disabled
+	.panel_ext-header
+		display: none
+	.timeline_line
+		display: none
+	.timeline_disabled-msg
+		display: block
+	
+.timeline_disabled-msg
+	display: none
+	position: absolute
+	top: 50%
+	right: 0
+	left: 0
+	margin: -1.2em 0 0
+	text-align: center
+	color: #CBCBCB
+	font-size: 1.2em
+
+.timeline_stat
+	display: inline-block
+	vertical-align: top
+	line-height: 23px
+	white-space: nowrap
+	@include pt_r
+	font-size: 12px
+	color: #676767
+	@include tsh_lighter
+
+.timeline_stat_item
+	display: inline-block
+	margin: 0 30px 0 0
+.timeline_stat_item_label
+	vertical-align: top
+.timeline_stat_item_value
+	vertical-align: top
+	margin: 0 0 0 2px
+	.timeline_stat_item__warn &
+		text-shadow: none
+		color: #F00 !important
+
+
+.timeline_stat_item__last-publish
+	.timeline_stat_item_value
+		margin-left: 8px
+		font-weight: bold
+		font-size: 16px
+		color: #000
+
+
+
+.timeline_feed
+	overflow-x: hidden
+	overflow-y: hidden
+	white-space: nowrap
+	height: 100%
+	&:hover
+		overflow-x: scroll
+.timeline_feed-core
+	position: relative
+	display: inline-block
+	min-width: 100%
+	height: 100%
+	padding: 9px 0
+	@include transition(height 0.2s ease-in-out,padding 0.2s ease-in-out)
+	.timeline__bootstraping &
+		visibility: hidden
+
+.timeline_widgets-set
+	display: inline-block
+	min-height: 80px
+	vertical-align: top
+.timeline_widgets-set__published
+	min-width: 80px
+	padding-right: 50px
+	@include trns(padding)
+	.timeline__zoom-out &
+		padding-right: 30px
+.timeline_widget-wrap
+	display: inline-block
+	vertical-align: top
+	margin: 0 3px
+
+.timeline_widgets-set__unpublished
+	position: relative
+	padding-right: 10px
+	& .widget
+		//FIXME
+		margin: 0 25px 0 0
+		.timeline__zoom-out &
+			margin-right: 10px
+.timeline_line
+	display: inline-block
+	position: absolute
+	top: 0
+	bottom: 0
+	margin: 0 0 0 -30px
+	vertical-align: top
+	width: 3px
+	height: 100%
+	background: #EA1D2C
+	@include box-shadow(0 1px rgba(255,255,255,0.25))
+	@include trns(margin)
+	.timeline__zoom-out &
+		margin-left: -17px
+
+.timeline_delete
+	position: absolute
+	z-index: 4
+	top: -23px
+	bottom: 23px
+	left: 0
+	width: 100px
+	padding: 10px
+	@include transition( all 0.3s 0.3s ease-in-out)
+	visibility: hidden
+	opacity: 0
+	@include box-sizing( border-box )
+	background: rgba(0, 0, 0, 0.4)
+	text-align: right
+	&.is-droppable
+		opacity: 1
+		visibility: visible
+		&:after
+			display: none
+	&.is-droppable-hover
+		@include transition( all 0.2s ease-in-out)
+		background: rgba(0, 0, 0, 0.8)
+.timeline_delete_text
+	display: block
+	margin: 0 0 12px
+	line-height: 1.1
+	color: #FFF
+
+.timeline_dropzone
+	position: absolute
+	top: 0
+	background: #000
+	opacity: 0
+	@include trns(opacity)
+	&.is-droppable-hover
+		opacity: 0.05
+	&.timeline_dropzone__small.is-droppable-hover
+		opacity: 0.2
+
+.timeline_widget
+	@include trns(left)

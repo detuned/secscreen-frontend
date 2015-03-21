@@ -1,0 +1,12 @@
+<div class="dialog" data-ng-class="[
+	'dialog__type-' + id,
+	isReady ? 'dialog__ready' : 'dialog__loading',
+	isBeforeReady ? 'dialog__before-ready' : ''
+	]">
+	<div class="dialog_header">
+		<div class="dialog_buttons">
+			<span class="dialog_button dialog_button__close" data-ng-click="closeDialog()"><span class="icon icon__close"></span></span>
+		</div>
+	</div>
+	<div class="dialog_body"><!-- Placeholder for <dialog-body> inserted by dialog directive --></div>
+</div>

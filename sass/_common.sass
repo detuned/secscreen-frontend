@@ -1,0 +1,392 @@
+$fonts_path: '/s/files/fonts'
+
+@font-face
+	font-family: 'PT Sans'
+	src: url($fonts_path + '/pts55f_w.eot')
+	src: local('PT Sans'), url($fonts_path + '/PTS55F_W.woff') format('woff'), url($fonts_path + '/PTS55F_W.ttf') format('truetype'), url($fonts_path + '/PTS55F_W.svg#PTSans-Regular') format('svg')
+
+@font-face
+	font-family: 'PT Sans'
+	font-style: italic
+	src: url($fonts_path + '/pts56f_w.eot')
+	src: local('PT Sans Italic'), url($fonts_path + '/PTS56F_W.woff') format('woff'), url($fonts_path + '/PTS56F_W.ttf') format('truetype'), url($fonts_path + '/PTS56F_W.svg#PTSans-Italic') format('svg')
+
+@font-face
+	font-family: 'PT Sans'
+	src: url($fonts_path + '/pts75f_w.eot')
+	font-style: normal
+	font-weight: bold
+	src: local('PT Sans Bold'), url($fonts_path + '/PTS75F_W.woff') format('woff'), url($fonts_path + '/PTS75F_W.ttf') format('truetype'), url($fonts_path + '/PTS75F_W.svg#PTSans-Bold') format('svg')
+
+@font-face
+	font-family: 'PT Sans'
+	font-style: italic
+	font-weight: bold
+	src: url($fonts_path + '/pts76f_w.eot')
+	src: local('PT Sans Bold Italic'), url($fonts_path + '/PTS76F_W.woff') format('woff'), url($fonts_path + '/PTS76F_W.ttf') format('truetype'), url($fonts_path + '/PTS76F_W.svg#PTSans-BoldItalic') format('svg')
+
+@font-face
+	font-family: 'PT Sans Caption'
+	src: url($fonts_path + '/ptc55f_w.eot')
+	src: local('PT Sans Caption'), url($fonts_path + '/PTC55F_W.woff') format('woff'), url($fonts_path + '/PTC55F_W.ttf') format('truetype'), url($fonts_path + '/PTC55F_W.svg#PTSans-Caption') format('svg')
+
+@font-face
+	font-family: 'PT Sans Caption'
+	font-weight: bold
+	src: url($fonts_path + '/ptc75f_w.eot')
+	src: local('PT Sans Caption Bold'), url($fonts_path + '/PTC75F_W.woff') format('woff'), url($fonts_path + '/PTC75F_W.ttf') format('truetype'), url($fonts_path + '/PTC75F_W.svg#PTSans-CaptionBold') format('svg')
+
+@font-face
+	font-family: 'PT Sans Narrow'
+	src: url($fonts_path + '/ptn57f_w.eot')
+	src: local('PT Sans Narrow'), url($fonts_path + '/PTN57F_W.woff') format('woff'), url($fonts_path + '/PTN57F_W.ttf') format('truetype'), url($fonts_path + '/PTN57F_W.svg#PTSans-Narrow') format('svg')
+
+@font-face
+	font-family: 'PT Sans Narrow'
+	font-weight: bold
+	src: url($fonts_path + '/ptn77f_w.eot')
+	src: local('PT Sans Narrow Bold'), url($fonts_path + '/PTN77F_W.woff') format('woff'), url($fonts_path + '/PTN77F_W.ttf') format('truetype'), url($fonts_path + '/PTN77F_W.svg#PTSans-NarrowBold') format('svg')
+
+
+// DIN Condensed -------------------------------------------------------------
+
+// Medium
+
+$font_name: "DINCondMediumRegular"
+$font_path: $fonts_path + "/ff_din_condensed_medium-webfont"
+
+@font-face
+	font-family: $font_name
+	src: url($font_path + ".eot")
+	src: url($font_path + ".eot?#iefix") format("embedded-opentype"), url($font_path + ".woff") format("woff"), url($font_path + ".ttf") format("truetype"), url($font_path + ".svg#" + $font_name) format("svg")
+	font-weight: normal
+	font-style: normal
+
+
+// Regular
+
+$font_name: "DINCondensed"
+$font_path: $fonts_path + "/DINCondensed"
+
+@font-face
+	font-family: $font_name
+	src: url($font_path + ".eot")
+	src: url($font_path + ".eot?#iefix") format("embedded-opentype"), url($font_path + ".woff") format("woff"), url($font_path + ".ttf") format("truetype"), url($font_path + ".svg#" + $font_name) format("svg")
+	font-weight: normal
+	font-style: normal
+
+
+a
+	text-decoration: none
+
+BUTTON,
+TEXTAREA
+	font-family: inherit
+	font-size: inherit
+	
+// fonts
+@mixin ptn_r
+	font-weight: normal
+	font-style: normal
+	font-family: 'PT Sans Narrow', sans-serif
+
+@mixin ptn_i
+	font-weight: normal
+	font-style: italic
+	font-family: 'PT Sans Narrow', sans-serif
+
+@mixin ptn_b
+	font-weight: bold
+	font-style: normal
+	font-family: 'PT Sans Narrow', sans-serif
+
+@mixin pt_r
+	font-weight: normal
+	font-style: normal
+	font-family: 'PT Sans', sans-serif
+
+@mixin pt_i
+	font-weight: normal
+	font-style: italic
+	font-family: 'PT Sans', sans-serif
+
+@mixin pt_b
+	font-weight: bold
+	font-style: normal
+	font-family: 'PT Sans', sans-serif
+
+@mixin ptc_r
+	font-weight: normal
+	font-style: normal
+	font-family: 'PT Sans Caption', sans-serif
+
+@mixin ptc_i
+	font-weight: normal
+	font-style: italic
+	font-family: 'PT Sans Caption', sans-serif
+
+@mixin ptc_b
+	font-weight: bold
+	font-style: normal
+	font-family: 'PT Sans Caption', sans-serif
+
+@mixin din
+	font-family: 'DINCondensed', Arial, sans-serif
+	text-transform: uppercase
+
+// text with shadow
+@mixin tsh_dark
+	text-shadow: 0 1px #000
+
+@mixin tsh_darker
+	text-shadow: 0 1px rgba(0,0,0,0.5)
+
+@mixin tsh_light
+	text-shadow: 0 1px #FFF
+
+@mixin tsh_lighter
+	text-shadow: 0 1px rgba(255,255,255,0.5)
+
+// transitions
+@mixin trns($prop:all)
+	@include transition($prop .2s ease-in-out)
+
+// user-select
+@mixin noselect($prop:none)
+	-moz-user-select: $prop
+	-webkit-user-select: $prop
+	user-select: $prop
+
+// absolute positioning blocks for all size
+@mixin pos_full
+	position: absolute
+	top: 0
+	right: 0
+	bottom: 0
+	left: 0
+
+%clr
+	&:after
+		content: ' '
+		display: block
+		height: 0
+		clear: both
+		visibility: hidden
+
+// Icons
+.icon
+	display: inline-block
+	vertical-align: middle
+
+.icon__settings
+	@include sized-sprite($icons, settings)
+
+.icon__trash
+	@include sized-sprite($icons, trash)
+
+.icon__trash-mini
+	@include sized-sprite($icons, trash_mini)
+
+.icon__close
+	@include sized-sprite($icons, close)
+
+.icon__close-small
+	@include sized-sprite($icons, close_small)
+
+.icon__attach
+	@include sized-sprite($icons, attach)
+
+.icon__medal-gold
+	@include sized-sprite($icons, medal_gold)
+
+.icon__medal-silver
+	@include sized-sprite($icons, medal_silver)
+
+.icon__medal-bronze
+	@include sized-sprite($icons, medal_bronze)
+
+.icon__new-tab
+	@include sized-sprite($icons, new_tab)
+
+.icon__busy
+	@include sized-sprite($icons, busy)
+
+.icon__busy-small
+	@include sized-sprite($icons, busy_small)
+
+.icon__crop
+	@include sized-sprite($icons, crop)
+
+
+// Buttons
+.button
+	display: inline-block
+	padding: 4px 8px 6px
+	border: 1px solid rgba(0, 0, 0, 0.8)
+	@include pt_r
+	@include tsh_dark
+	@include border-radius(6px)
+	@include noselect
+	color: rgba(255, 255, 255, 0.8)
+	@include background-image(linear-gradient(top, #5B5B5B 0%, #313131 100%))
+	cursor: pointer
+	line-height: 1.3
+	.icon
+		margin: 0 6px 0 0
+		opacity: 0.8
+	&:hover,
+	.button_wrap:hover>&
+		color: rgba(255, 255, 255, 1)
+		.icon
+			opacity: 1
+	&:active
+		padding-right: 7px
+		padding-left: 9px
+		@include box-shadow( inset 1px 1px 1px rgba(0,0,0,0.4))
+		color: rgba(255, 255, 255, 0.8)
+		background: #5B5B5B
+		.icon
+			opacity: 0.8
+	&:disabled,
+	&.button__disabled,
+	&:disabled:hover,
+	&.button__disabled:hover,
+	&:disabled:active
+		border: 1px solid rgba(0, 0, 0, 0.3)
+		background: #848484
+		outline: none
+		cursor: default
+		color: rgba(255, 255, 255, 0.4)
+		text-shadow: none
+		@include box-shadow(none)
+		.icon
+			opacity: 0.4
+
+
+
+
+.button__xxl
+	padding: 6px 12px 8px
+	font-size: 16px
+	&:active
+		padding: 7px 11px 7px 13px
+
+.button__xxxl
+	padding: 6px 12px 8px
+	font-size: 18px
+	&:active
+		padding: 7px 11px 7px 13px
+
+.button__compact
+	@include ptn_r
+
+.button__icon
+	padding: 6px 8px
+	@include border-radius(12px)
+	&:hover
+		padding: 6px 8px
+	.icon
+		margin-right: 0
+.button__green
+	@include background-image(linear-gradient(top, #2BA94C 0%, #175A28 100%))
+	&:hover
+		@include background-image(linear-gradient(top, #00d337 0%, #00721E 100%))
+	&:active
+		background: #00721E
+.button__red
+	@include background-image(linear-gradient(top, #A82B2B 0%, #5A1717 100%))
+	&:hover
+		@include background-image(linear-gradient(top, #D40000 0%, #700000 100%))
+	&:active
+		background: #700000
+	&:disabled,
+	&.button__disabled,
+	&:disabled:hover,
+	&.button__disabled:hover,
+	&:disabled:active
+		border: 1px solid rgba(0, 0, 0, 0.3)
+		background: #6e3737
+		outline: none
+		cursor: default
+		color: rgba(255, 255, 255, 0.4)
+		text-shadow: none
+		@include box-shadow(none)
+.button__fire
+	@include background-image(linear-gradient(top, #D40000 0%, #700000 100%))
+	&:hover
+		@include background-image(linear-gradient(top, #E60000 0%, #900 100%))
+	&:active
+		background: #900
+	&:disabled,
+	&.button__disabled,
+	&:disabled:hover,
+	&.button__disabled:hover,
+	&:disabled:active
+		background: #994D4D
+		outline: none
+		cursor: default
+		color: rgba(255, 255, 255, 0.4)
+		text-shadow: none
+.button__gray
+	border-color: rgba(0, 0, 0, 0.5)
+	@include background-image(linear-gradient(top, #747474 0%, #3B3B3B 100%))
+	&:hover,
+	.button_wrap:hover>&
+		@include background-image(linear-gradient(top, #8c8c8c 0%, #545454 100%))
+	&:active
+		background: #363636
+.button__text
+	color: #666
+	border: none
+	text-shadow: none
+	background: none
+	&:hover,
+	&:active
+		@include box-shadow(none)
+		color: #EA1D2C
+		background: none
+.button__text__bright
+	color: rgba(255,255,255,0.6)
+	&:hover,
+	&:active
+		color: rgba(255,255,255,1)
+
+
+
+
+
+// Group switchers
+.group-switches
+	display: inline-block
+	white-space: nowrap
+.group-switch
+	display: inline-block
+	position: relative
+	height: 2em
+	line-height: 2
+	margin: 0 0 0 -1px
+	@include noselect
+	padding: 0 12px
+	border: 1px solid #D7D7D7
+	@include box-shadow(0 2px 3px rgba(0,0,0,0.1))
+	@include background-image(linear-gradient(top, #FDFDFD 0%, #F6F6F6 100%))
+	vertical-align: middle
+	cursor: pointer
+	color: #4D4D4D
+	@include trns
+	&:hover
+		z-index: 2
+		@include background-image(linear-gradient(top, #FFF 0%, #F9F9F9 100%))
+		@include box-shadow(0 2px 3px rgba(0,0,0,0.2))
+	&:first-child
+		@include border-radius(4px 0 0 4px)
+		margin-left: 0
+	&:last-child
+		@include border-radius(0 4px 4px 0)
+.group-switch__active,
+.group-switch__active:hover,
+.group-switch:active
+	@include box-shadow(inset 0 2px rgba(0,0,0,0.3))
+	border-color: #C0C0C2
+	background: #DDDDE0
+	color: #000

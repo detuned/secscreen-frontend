@@ -1,0 +1,7 @@
+<div class="folder-widgets" >
+	<div class="folder-widgets_core">
+		<div data-ng-repeat="widgetData in widgets" class="folder-widgets_item" data-ng-class="{ 'folder-widgets_item__highlighted' : isWidgetNew( $index ) }">
+			<widget-preview data-id="widgetData.id" data-view="CONST.WIDGET_VIEW_MINI" data-zone="folder"></widget-preview>
+		</div>
+	</div>
+</div>
